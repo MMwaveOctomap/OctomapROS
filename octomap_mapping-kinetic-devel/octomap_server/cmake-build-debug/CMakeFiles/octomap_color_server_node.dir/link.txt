@@ -1,0 +1,1 @@
+/usr/bin/c++  -g  -rdynamic CMakeFiles/octomap_color_server_node.dir/src/octomap_server_node.cpp.o  -o octomap_color_server_node liboctomap_server_color.a 

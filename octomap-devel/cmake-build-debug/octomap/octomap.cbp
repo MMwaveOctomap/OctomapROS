@@ -1,0 +1,1499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="octomap"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\dynamicEDT3D\;CMake Files\dynamicEDT3D\CMakeModules\;CMake Files\dynamicEDT3D\src\;CMake Files\dynamicEDT3D\src\examples\;CMake Files\lib\;CMake Files\lib\cmake\;CMake Files\lib\cmake\octomap\;CMake Files\octomap\;CMake Files\octomap\CMakeModules\;CMake Files\octomap\src\;CMake Files\octomap\src\math\;CMake Files\octomap\src\testing\;CMake Files\octovis\;CMake Files\octovis\CMakeModules\;CMake Files\octovis\src\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Nightly">
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/Makefile&quot;  VERBOSE=1 Nightly"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Experimental">
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/Makefile&quot;  VERBOSE=1 Experimental"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Continuous">
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/Makefile&quot;  VERBOSE=1 Continuous"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="uninstall">
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/Makefile&quot;  VERBOSE=1 uninstall"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="octomath-static">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/lib/liboctomath.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/math"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/math/Makefile&quot;  VERBOSE=1 octomath-static"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/math/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/math/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/math/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="octomath-static/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/lib/liboctomath.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/math"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/math/Makefile&quot;  VERBOSE=1 octomath-static/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/math/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/math/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/math/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="octomath">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/lib/liboctomath.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/math"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/math/Makefile&quot;  VERBOSE=1 octomath"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/math/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/math/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/math/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="octomath/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/lib/liboctomath.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/math"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/math/Makefile&quot;  VERBOSE=1 octomath/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/math/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/math/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/math/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="log2graph">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/log2graph" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 log2graph"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="log2graph/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/log2graph" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 log2graph/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="bt2vrml">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/bt2vrml" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 bt2vrml"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="bt2vrml/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/bt2vrml" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 bt2vrml/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_octree">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/edit_octree" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 edit_octree"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_octree/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/edit_octree" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 edit_octree/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="binvox2bt">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/binvox2bt" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 binvox2bt"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="binvox2bt/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/binvox2bt" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 binvox2bt/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="octomap">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/lib/liboctomap.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 octomap"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="octomap/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/lib/liboctomap.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 octomap/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="octomap-static">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/lib/liboctomap.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 octomap-static"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="octomap-static/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/lib/liboctomap.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 octomap-static/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="convert_octree">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/convert_octree" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 convert_octree"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="convert_octree/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/convert_octree" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 convert_octree/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="normals_example">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/normals_example" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 normals_example"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="normals_example/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/normals_example" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 normals_example/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="eval_octree_accuracy">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/eval_octree_accuracy" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 eval_octree_accuracy"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="eval_octree_accuracy/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/eval_octree_accuracy" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 eval_octree_accuracy/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="compare_octrees">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/compare_octrees" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 compare_octrees"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="compare_octrees/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/compare_octrees" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 compare_octrees/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="intersection_example">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/intersection_example" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 intersection_example"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="intersection_example/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/intersection_example" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 intersection_example/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="octree2pointcloud">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/octree2pointcloud" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 octree2pointcloud"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="octree2pointcloud/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/octree2pointcloud" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 octree2pointcloud/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="graph2tree">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/graph2tree" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 graph2tree"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="graph2tree/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/graph2tree" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 graph2tree/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="simple_example">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/simple_example" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 simple_example"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="simple_example/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/simple_example" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 simple_example/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_scans">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/test_scans" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 test_scans"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_scans/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/test_scans" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 test_scans/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_raycasting">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/test_raycasting" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 test_raycasting"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_raycasting/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/test_raycasting" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 test_raycasting/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_changedkeys">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/test_changedkeys" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 test_changedkeys"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_changedkeys/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/test_changedkeys" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 test_changedkeys/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_iterators">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/test_iterators" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 test_iterators"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_iterators/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/test_iterators" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 test_iterators/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_color_tree">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/test_color_tree" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 test_color_tree"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_color_tree/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/test_color_tree" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 test_color_tree/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="color_tree_histogram">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/color_tree_histogram" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 color_tree_histogram"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="color_tree_histogram/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/color_tree_histogram" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 color_tree_histogram/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="unit_tests">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/unit_tests" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 unit_tests"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="unit_tests/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/unit_tests" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 unit_tests/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_mapcollection">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/test_mapcollection" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 test_mapcollection"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_mapcollection/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/test_mapcollection" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 test_mapcollection/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_io">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/test_io" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 test_io"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_io/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/test_io" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 test_io/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_pruning">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/test_pruning" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 test_pruning"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="test_pruning/fast">
+				<Option output="/home/zgh/workspace/octomap_src/octomap-devel/bin/test_pruning" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/zgh/workspace/octomap_src/octomap-devel/bin"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/zgh/workspace/octomap_src/octomap-devel/octomap/include"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 test_pruning/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/AbstractOcTree.cpp">
+			<Option target="octomap"/>
+			<Option target="octomap-static"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/AbstractOccupancyOcTree.cpp">
+			<Option target="octomap"/>
+			<Option target="octomap-static"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/ColorOcTree.cpp">
+			<Option target="octomap"/>
+			<Option target="octomap-static"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/CountingOcTree.cpp">
+			<Option target="octomap"/>
+			<Option target="octomap-static"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/OcTree.cpp">
+			<Option target="octomap"/>
+			<Option target="octomap-static"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/OcTreeNode.cpp">
+			<Option target="octomap"/>
+			<Option target="octomap-static"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/OcTreeStamped.cpp">
+			<Option target="octomap"/>
+			<Option target="octomap-static"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/Pointcloud.cpp">
+			<Option target="octomap"/>
+			<Option target="octomap-static"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/ScanGraph.cpp">
+			<Option target="octomap"/>
+			<Option target="octomap-static"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/binvox2bt.cpp">
+			<Option target="binvox2bt"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/bt2vrml.cpp">
+			<Option target="bt2vrml"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/compare_octrees.cpp">
+			<Option target="compare_octrees"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/convert_octree.cpp">
+			<Option target="convert_octree"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/edit_octree.cpp">
+			<Option target="edit_octree"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/eval_octree_accuracy.cpp">
+			<Option target="eval_octree_accuracy"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/graph2tree.cpp">
+			<Option target="graph2tree"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/intersection_example.cpp">
+			<Option target="intersection_example"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/log2graph.cpp">
+			<Option target="log2graph"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/math/Pose6D.cpp">
+			<Option target="octomath-static"/>
+			<Option target="octomath"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/math/Quaternion.cpp">
+			<Option target="octomath-static"/>
+			<Option target="octomath"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/math/Vector3.cpp">
+			<Option target="octomath-static"/>
+			<Option target="octomath"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/normals_example.cpp">
+			<Option target="normals_example"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/octree2pointcloud.cpp">
+			<Option target="octree2pointcloud"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/simple_example.cpp">
+			<Option target="simple_example"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/testing/color_tree_histogram.cpp">
+			<Option target="color_tree_histogram"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/testing/test_changedkeys.cpp">
+			<Option target="test_changedkeys"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/testing/test_color_tree.cpp">
+			<Option target="test_color_tree"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/testing/test_io.cpp">
+			<Option target="test_io"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/testing/test_iterators.cpp">
+			<Option target="test_iterators"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/testing/test_mapcollection.cpp">
+			<Option target="test_mapcollection"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/testing/test_pruning.cpp">
+			<Option target="test_pruning"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/testing/test_raycasting.cpp">
+			<Option target="test_raycasting"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/testing/test_scans.cpp">
+			<Option target="test_scans"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/testing/unit_tests.cpp">
+			<Option target="unit_tests"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/dynamicEDT3D/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\dynamicEDT3D\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/dynamicEDT3D/dynamicEDT3DConfig.cmake.in">
+			<Option virtualFolder="CMake Files\dynamicEDT3D\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/dynamicEDT3D/CMakeModules/CPackSettings.cmake">
+			<Option virtualFolder="CMake Files\dynamicEDT3D\CMakeModules\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/dynamicEDT3D/CMakeModules/CompilerSettings.cmake">
+			<Option virtualFolder="CMake Files\dynamicEDT3D\CMakeModules\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/dynamicEDT3D/CMakeModules/InstallPkgConfigFile.cmake">
+			<Option virtualFolder="CMake Files\dynamicEDT3D\CMakeModules\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/dynamicEDT3D/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\dynamicEDT3D\src\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/dynamicEDT3D/src/examples/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\dynamicEDT3D\src\examples\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/lib/cmake/octomap/octomap-config-version.cmake">
+			<Option virtualFolder="CMake Files\lib\cmake\octomap\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/lib/cmake/octomap/octomap-config.cmake">
+			<Option virtualFolder="CMake Files\lib\cmake\octomap\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\octomap\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/octomap-config.cmake.in">
+			<Option virtualFolder="CMake Files\octomap\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/CMakeModules/CMakeUninstall.cmake.in">
+			<Option virtualFolder="CMake Files\octomap\CMakeModules\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/CMakeModules/CPackSettings.cmake">
+			<Option virtualFolder="CMake Files\octomap\CMakeModules\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/CMakeModules/CompilerSettings.cmake">
+			<Option virtualFolder="CMake Files\octomap\CMakeModules\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/CMakeModules/InstallPkgConfigFile.cmake">
+			<Option virtualFolder="CMake Files\octomap\CMakeModules\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\octomap\src\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/math/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\octomap\src\math\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octomap/src/testing/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\octomap\src\testing\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octovis/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\octovis\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octovis/CMakeLists_src.txt">
+			<Option virtualFolder="CMake Files\octovis\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octovis/octovis-config.cmake.in">
+			<Option virtualFolder="CMake Files\octovis\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octovis/CMakeModules/CompilerSettings.cmake">
+			<Option virtualFolder="CMake Files\octovis\CMakeModules\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octovis/CMakeModules/FindQGLViewer.cmake">
+			<Option virtualFolder="CMake Files\octovis\CMakeModules\"/>
+		</Unit>
+		<Unit filename="/home/zgh/workspace/octomap_src/octomap-devel/octovis/src/icons.qrc">
+			<Option virtualFolder="CMake Files\octovis\src\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,1 @@
+/usr/bin/c++  -g  -rdynamic CMakeFiles/octomap_server_static.dir/src/octomap_server_static.cpp.o  -o octomap_server_static liboctomap_server.a 

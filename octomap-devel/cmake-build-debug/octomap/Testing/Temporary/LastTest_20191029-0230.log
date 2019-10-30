@@ -1,0 +1,227 @@
+Start testing: Oct 29 10:30 CST
+----------------------------------------------------------
+Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/unit_tests
+1/14 Testing: MathVector
+1/14 Test: MathVector
+Command: "" "MathVector"
+Directory: /home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing
+"MathVector" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MathVector" end time: Oct 29 10:30 CST
+"MathVector" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/unit_tests
+2/14 Testing: MathPose
+2/14 Test: MathPose
+Command: "" "MathPose"
+Directory: /home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing
+"MathPose" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"MathPose" end time: Oct 29 10:30 CST
+"MathPose" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/unit_tests
+3/14 Testing: InsertRay
+3/14 Test: InsertRay
+Command: "" "InsertRay"
+Directory: /home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing
+"InsertRay" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"InsertRay" end time: Oct 29 10:30 CST
+"InsertRay" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/unit_tests
+4/14 Testing: InsertScan
+4/14 Test: InsertScan
+Command: "" "InsertScan"
+Directory: /home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing
+"InsertScan" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"InsertScan" end time: Oct 29 10:30 CST
+"InsertScan" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/unit_tests
+5/14 Testing: ReadGraph
+5/14 Test: ReadGraph
+Command: "" "ReadGraph"
+Directory: /home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing
+"ReadGraph" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"ReadGraph" end time: Oct 29 10:30 CST
+"ReadGraph" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/unit_tests
+6/14 Testing: StampedTree
+6/14 Test: StampedTree
+Command: "" "StampedTree"
+Directory: /home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing
+"StampedTree" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"StampedTree" end time: Oct 29 10:30 CST
+"StampedTree" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/unit_tests
+7/14 Testing: OcTreeKey
+7/14 Test: OcTreeKey
+Command: "" "OcTreeKey"
+Directory: /home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing
+"OcTreeKey" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"OcTreeKey" end time: Oct 29 10:30 CST
+"OcTreeKey" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/test_scans
+8/14 Testing: test_scans
+8/14 Test: test_scans
+Command: "" "/home/zgh/workspace/octomap_src/octomap-devel/octomap/share/data/spherical_scan.graph"
+Directory: /home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing
+"test_scans" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"test_scans" end time: Oct 29 10:30 CST
+"test_scans" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/test_raycasting
+9/14 Testing: test_raycasting
+9/14 Test: test_raycasting
+Command: ""
+Directory: /home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing
+"test_raycasting" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"test_raycasting" end time: Oct 29 10:30 CST
+"test_raycasting" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/test_io
+10/14 Testing: test_io
+10/14 Test: test_io
+Command: "" "/home/zgh/workspace/octomap_src/octomap-devel/octomap/share/data/geb079.bt"
+Directory: /home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing
+"test_io" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"test_io" end time: Oct 29 10:30 CST
+"test_io" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/test_pruning
+11/14 Testing: test_pruning
+11/14 Test: test_pruning
+Command: ""
+Directory: /home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing
+"test_pruning" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"test_pruning" end time: Oct 29 10:30 CST
+"test_pruning" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/test_iterators
+12/14 Testing: test_iterators
+12/14 Test: test_iterators
+Command: "" "/home/zgh/workspace/octomap_src/octomap-devel/octomap/share/data/geb079.bt"
+Directory: /home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing
+"test_iterators" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"test_iterators" end time: Oct 29 10:30 CST
+"test_iterators" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/test_mapcollection
+13/14 Testing: test_mapcollection
+13/14 Test: test_mapcollection
+Command: "" "/home/zgh/workspace/octomap_src/octomap-devel/octomap/share/data/mapcoll.txt"
+Directory: /home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing
+"test_mapcollection" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"test_mapcollection" end time: Oct 29 10:30 CST
+"test_mapcollection" time elapsed: 00:00:00
+----------------------------------------------------------
+
+Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/test_color_tree
+14/14 Testing: test_color_tree
+14/14 Test: test_color_tree
+Command: ""
+Directory: /home/zgh/workspace/octomap_src/octomap-devel/cmake-build-debug/octomap/src/testing
+"test_color_tree" start time: 
+Output:
+----------------------------------------------------------
+<end of output>
+Test time =   0.00 sec
+----------------------------------------------------------
+Test Passed.
+"test_color_tree" end time: Oct 29 10:30 CST
+"test_color_tree" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 29 10:30 CST

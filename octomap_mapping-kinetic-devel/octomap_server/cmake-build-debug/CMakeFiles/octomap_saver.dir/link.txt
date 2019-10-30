@@ -1,0 +1,1 @@
+/usr/bin/c++  -g  -rdynamic CMakeFiles/octomap_saver.dir/src/octomap_saver.cpp.o  -o octomap_saver liboctomap_server.a 

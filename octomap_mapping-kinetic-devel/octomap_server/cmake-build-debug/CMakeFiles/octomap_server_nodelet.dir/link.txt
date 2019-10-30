@@ -1,0 +1,2 @@
+/usr/bin/ar qc liboctomap_server_nodelet.a  CMakeFiles/octomap_server_nodelet.dir/src/octomap_server_nodelet.cpp.o
+/usr/bin/ranlib liboctomap_server_nodelet.a

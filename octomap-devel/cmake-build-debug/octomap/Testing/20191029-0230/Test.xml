@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Linux-c++"
+	BuildStamp="20191029-0230-Experimental"
+	Name="zgh-ThinkPad-T460p"
+	Generator="ctest-3.15.3"
+	CompilerName="/usr/bin/c++"
+	CompilerVersion="5.4.0"
+	OSName="Linux"
+	Hostname="zgh-ThinkPad-T460p"
+	OSRelease="4.15.0-45-generic"
+	OSVersion="#48~16.04.1-Ubuntu SMP Tue Jan 29 18:03:48 UTC 2019"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="GenuineIntel"
+	VendorID="Intel Corporation"
+	FamilyID="6"
+	ModelID="94"
+	ProcessorCacheSize="6144"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="4"
+	TotalVirtualMemory="7628"
+	TotalPhysicalMemory="7829"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="2700.07"
+	>
+	<Testing>
+		<StartDateTime>Oct 29 10:30 CST</StartDateTime>
+		<StartTestTime>1572316204</StartTestTime>
+		<TestList>
+			<Test>./src/testing/MathVector</Test>
+			<Test>./src/testing/MathPose</Test>
+			<Test>./src/testing/InsertRay</Test>
+			<Test>./src/testing/InsertScan</Test>
+			<Test>./src/testing/ReadGraph</Test>
+			<Test>./src/testing/StampedTree</Test>
+			<Test>./src/testing/OcTreeKey</Test>
+			<Test>./src/testing/test_scans</Test>
+			<Test>./src/testing/test_raycasting</Test>
+			<Test>./src/testing/test_io</Test>
+			<Test>./src/testing/test_pruning</Test>
+			<Test>./src/testing/test_iterators</Test>
+			<Test>./src/testing/test_mapcollection</Test>
+			<Test>./src/testing/test_color_tree</Test>
+		</TestList>
+		<Test Status="notrun">
+			<Name>MathVector</Name>
+			<Path>./src/testing</Path>
+			<FullName>./src/testing/MathVector</FullName>
+			<FullCommandLine></FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Unable to find executable</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value></Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/unit_tests</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="notrun">
+			<Name>MathPose</Name>
+			<Path>./src/testing</Path>
+			<FullName>./src/testing/MathPose</FullName>
+			<FullCommandLine></FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Unable to find executable</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value></Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/unit_tests</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="notrun">
+			<Name>InsertRay</Name>
+			<Path>./src/testing</Path>
+			<FullName>./src/testing/InsertRay</FullName>
+			<FullCommandLine></FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Unable to find executable</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value></Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/unit_tests</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="notrun">
+			<Name>InsertScan</Name>
+			<Path>./src/testing</Path>
+			<FullName>./src/testing/InsertScan</FullName>
+			<FullCommandLine></FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Unable to find executable</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value></Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/unit_tests</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="notrun">
+			<Name>ReadGraph</Name>
+			<Path>./src/testing</Path>
+			<FullName>./src/testing/ReadGraph</FullName>
+			<FullCommandLine></FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Unable to find executable</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value></Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/unit_tests</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="notrun">
+			<Name>StampedTree</Name>
+			<Path>./src/testing</Path>
+			<FullName>./src/testing/StampedTree</FullName>
+			<FullCommandLine></FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Unable to find executable</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value></Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/unit_tests</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="notrun">
+			<Name>OcTreeKey</Name>
+			<Path>./src/testing</Path>
+			<FullName>./src/testing/OcTreeKey</FullName>
+			<FullCommandLine></FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Unable to find executable</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value></Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/unit_tests</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="notrun">
+			<Name>test_scans</Name>
+			<Path>./src/testing</Path>
+			<FullName>./src/testing/test_scans</FullName>
+			<FullCommandLine></FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Unable to find executable</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value></Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/test_scans</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="notrun">
+			<Name>test_raycasting</Name>
+			<Path>./src/testing</Path>
+			<FullName>./src/testing/test_raycasting</FullName>
+			<FullCommandLine></FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Unable to find executable</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value></Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/test_raycasting</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="notrun">
+			<Name>test_io</Name>
+			<Path>./src/testing</Path>
+			<FullName>./src/testing/test_io</FullName>
+			<FullCommandLine></FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Unable to find executable</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value></Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/test_io</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="notrun">
+			<Name>test_pruning</Name>
+			<Path>./src/testing</Path>
+			<FullName>./src/testing/test_pruning</FullName>
+			<FullCommandLine></FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Unable to find executable</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value></Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/test_pruning</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="notrun">
+			<Name>test_iterators</Name>
+			<Path>./src/testing</Path>
+			<FullName>./src/testing/test_iterators</FullName>
+			<FullCommandLine></FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Unable to find executable</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value></Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/test_iterators</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="notrun">
+			<Name>test_mapcollection</Name>
+			<Path>./src/testing</Path>
+			<FullName>./src/testing/test_mapcollection</FullName>
+			<FullCommandLine></FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Unable to find executable</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value></Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/test_mapcollection</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="notrun">
+			<Name>test_color_tree</Name>
+			<Path>./src/testing</Path>
+			<FullName>./src/testing/test_color_tree</FullName>
+			<FullCommandLine></FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Unable to find executable</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value></Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value>Unable to find executable: /home/zgh/workspace/octomap_src/octomap-devel/bin/test_color_tree</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>Oct 29 10:30 CST</EndDateTime>
+		<EndTestTime>1572316204</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

@@ -1,0 +1,2 @@
+/usr/bin/ar qc liboctomap_server.a  CMakeFiles/octomap_server.dir/src/OctomapServer.cpp.o CMakeFiles/octomap_server.dir/src/OctomapServerMultilayer.cpp.o CMakeFiles/octomap_server.dir/src/TrackingOctomapServer.cpp.o
+/usr/bin/ranlib liboctomap_server.a

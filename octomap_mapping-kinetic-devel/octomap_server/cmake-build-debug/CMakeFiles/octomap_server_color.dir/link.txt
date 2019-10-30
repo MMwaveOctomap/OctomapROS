@@ -1,0 +1,2 @@
+/usr/bin/ar qc liboctomap_server_color.a  CMakeFiles/octomap_server_color.dir/src/OctomapServer.cpp.o CMakeFiles/octomap_server_color.dir/src/OctomapServerMultilayer.cpp.o CMakeFiles/octomap_server_color.dir/src/TrackingOctomapServer.cpp.o
+/usr/bin/ranlib liboctomap_server_color.a
