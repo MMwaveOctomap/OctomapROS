@@ -2,7 +2,7 @@
 ubuntu下：
 > sudo apt-get install doxygen
 
-将本文件夹下的配置文件拷贝到需要生成文档的项目目录下，执行：
+将本文件夹下的配置文件(Doxyfile)拷贝到需要生成文档的项目目录下，执行：
 
 > doxygen Doxyfile
 

@@ -10,6 +10,24 @@
  * ...
  * @section 第二章：相当于word的标题
  * ...
+ # 也支持markdown
+ ## 参数说明如下表：
+ name     | type     |description of param
+ ----------|-----------|--------------------
+ car_id   | int      |车源编号
+ province | int      |业务员所在省份
+ x        |  x       |   x
+ x        |  x       |   x
+ x        |  x       |   x
+ @return    返回值说明如下：
+ name     | type     | description of value
+ -------- |----------|----------------------
+ car_id   | int      | 车源编号
+ car_info | object   | json对象格式的车源信息
+
+ > 所以也可以用markdown,'*'也不用每行都写
+
+
  * @date 20191030
  */
 
@@ -46,6 +64,8 @@ public:
 	 * 	-例2 p2
 	 * @param[out] 输出 void没有输出
 	 * @return 和param写法类似
+	 *  @retval 1 xxx
+	 *  @retval 2 xxx
 	 * @see 注意
 	 */
 	static void printHello(string str){
