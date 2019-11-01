@@ -44,8 +44,7 @@
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-void
-pcl::StatisticalOutlierRemoval<pcl::PCLPointCloud2>::applyFilter (PCLPointCloud2 &output)
+void pcl::StatisticalOutlierRemoval<pcl::PCLPointCloud2>::applyFilter (PCLPointCloud2 &output)
 {
   // If fields x/y/z are not present, we cannot filter
   if (x_idx_ == -1 || y_idx_ == -1 || z_idx_ == -1)
@@ -68,7 +67,9 @@ pcl::StatisticalOutlierRemoval<pcl::PCLPointCloud2>::applyFilter (PCLPointCloud2
   double variance;
   double stddev;
   std::vector<float> distances;
+  // todo: first call generateStatistics()
   generateStatistics (mean, variance, stddev, distances);
+  // 设置阈值,我们设置阈值为平均值加上n倍标准差，可以观察高斯分布图像,一旦点的距离与均值的距离差大于阈值,我们就认为是离群点
   double const distance_threshold = mean + std_mul_ * stddev; // a distance that is bigger than this signals an outlier
 
   // Copy the common fields
@@ -103,6 +104,7 @@ pcl::StatisticalOutlierRemoval<pcl::PCLPointCloud2>::applyFilter (PCLPointCloud2
     if (remove_point)
     {
       if (extract_removed_indices_)
+          // 记录离群点的索引
         (*removed_indices_)[nr_removed_p++] = cp;
 
       if (keep_organized_)
@@ -114,13 +116,15 @@ pcl::StatisticalOutlierRemoval<pcl::PCLPointCloud2>::applyFilter (PCLPointCloud2
           nr_p++;
           output.is_dense = false;
       }
+      }
       else
         continue;
-    }
+
     else
     {
       memcpy (&output.data[nr_p * output.point_step], &input_->data[(*indices_)[cp] * output.point_step],
               output.point_step);
+      // todo std::size_t nr_p = cloud.points.size ();
       nr_p++;
     }
   }
@@ -136,8 +140,8 @@ pcl::StatisticalOutlierRemoval<pcl::PCLPointCloud2>::applyFilter (PCLPointCloud2
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-void
-pcl::StatisticalOutlierRemoval<pcl::PCLPointCloud2>::applyFilter (vector<int>& indices)
+// void pcl::StatisticalOutlierRemoval<pcl::PCLPointCloud2>::applyFilter (PCLPointCloud2 &output)
+void pcl::StatisticalOutlierRemoval<pcl::PCLPointCloud2>::applyFilter (vector<int>& indices)
 {
   // If fields x/y/z are not present, we cannot filter
   if (x_idx_ == -1 || y_idx_ == -1 || z_idx_ == -1)
@@ -158,7 +162,9 @@ pcl::StatisticalOutlierRemoval<pcl::PCLPointCloud2>::applyFilter (vector<int>& i
   double variance;
   double stddev;
   std::vector<float> distances;
+  // todo : sencond call generateStatistics()
   generateStatistics(mean, variance, stddev, distances);
+  // 计算阈值
   double const distance_threshold = mean + std_mul_ * stddev; // a distance that is bigger than this signals an outlier
 
   // Second pass: Classify the points on the computed distance threshold
@@ -184,8 +190,7 @@ pcl::StatisticalOutlierRemoval<pcl::PCLPointCloud2>::applyFilter (vector<int>& i
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-void
-pcl::StatisticalOutlierRemoval<pcl::PCLPointCloud2>::generateStatistics (double& mean,
+void pcl::StatisticalOutlierRemoval<pcl::PCLPointCloud2>::generateStatistics (double& mean,
                                                                          double& variance,
                                                                          double& stddev,
                                                                          std::vector<float>& distances)
@@ -212,8 +217,11 @@ pcl::StatisticalOutlierRemoval<pcl::PCLPointCloud2>::generateStatistics (double&
   distances.resize (indices_->size ());
   int valid_distances = 0;
   // Go over all the points and calculate the mean or smallest distance
+  // todo: cp input indices iterator
+  // 计算每一个点与它K近邻之间的均值
   for (std::size_t cp = 0; cp < indices_->size (); ++cp)
   {
+      // 检测x,y,z是否存在
     if (!std::isfinite (cloud->points[(*indices_)[cp]].x) || 
         !std::isfinite (cloud->points[(*indices_)[cp]].y) ||
         !std::isfinite (cloud->points[(*indices_)[cp]].z))
@@ -222,6 +230,7 @@ pcl::StatisticalOutlierRemoval<pcl::PCLPointCloud2>::generateStatistics (double&
       continue;
     }
 
+    // 执行K近邻搜索
     if (tree_->nearestKSearch ((*indices_)[cp], mean_k_, nn_indices, nn_dists) == 0)
     {
       distances[cp] = 0;
@@ -233,6 +242,7 @@ pcl::StatisticalOutlierRemoval<pcl::PCLPointCloud2>::generateStatistics (double&
     double dist_sum = 0;
     for (int j = 1; j < mean_k_; ++j)
       dist_sum += sqrt (nn_dists[j]);
+    // 求出每个点对应的K近邻的平均值
     distances[cp] = static_cast<float> (dist_sum / (mean_k_ - 1));
     valid_distances++;
   }
@@ -245,6 +255,8 @@ pcl::StatisticalOutlierRemoval<pcl::PCLPointCloud2>::generateStatistics (double&
     sq_sum += distance * distance;
   }
 
+
+  // 计算平均值,标准差,协方差 （相对于整个数据）
   mean = sum / static_cast<double>(valid_distances);
   variance = (sq_sum - sum * sum / static_cast<double>(valid_distances)) / (static_cast<double>(valid_distances) - 1);
   stddev = sqrt (variance);
