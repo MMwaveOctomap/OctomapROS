@@ -158,3 +158,4 @@ double const distance_threshold = mean + std_mul_ * stddev;
       removed_indices_->resize (nr_removed_p);
 ```
 
+$$ 1+2 $$
