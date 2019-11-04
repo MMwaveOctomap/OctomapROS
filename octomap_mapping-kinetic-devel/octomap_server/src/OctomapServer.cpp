@@ -1,32 +1,9 @@
-/*
- * Copyright (c) 2010-2013, A. Hornung, University of Freiburg
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the University of Freiburg nor the names of its
- *       contributors may be used to endorse or promote products derived from
- *       this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- */
-
+/**
+ * @file OctomapServer.cpp
+ * @version 1.0.0
+ * @author yzc
+ * @brief OctomapSever.cpp实现了OctomapSever.h中声明的函数。
+*/
 #include <octomap_server/OctomapServer.h>
 
 using namespace octomap;
@@ -38,7 +15,69 @@ bool is_equal (double a, double b, double epsilon = 1.0e-7)
 }
 
 namespace octomap_server{
-
+  /**
+   * @brief 这个函数是OctomapSever类的构造函数，在创建该类的时候就会调用构造函数。该构造函数首先对OtomapSever类中的一些变量赋予了初值，赋予初值的方式是利用ROS的
+   * 参数服务器进行赋值；其次，它会创建一个八分树，八分树是一种数据结构，用来存储地图信息；再次，构造函数会初始化八分树，将一些变量传给八分树；最后，根据ROS的工作原理，
+   * 构造函数还会发布和订阅一些话题，并且提供相应的服务。
+   * 
+   * # 参数服务器
+   * 参数服务器是ROS中的一项功能，该函数的形式是 \n
+   * ros::NodeHandle::param(const std::string & param_name, T & param_val, const T& default_val） \n
+   * 从参数服务器中检索名为param_name的变量并将值赋予param_val,若未找到，则赋予param_val默认值default_val。参数服务器的中的变量在.launch文件中声明，其格式为: \n
+   * "< param name="param_name"  type="param_type"  value="param_value" >" \n
+   *  
+   * # 订阅、发布的消息以及提供的服务
+   * ## 发布消息
+   * advertise()函数向一个话题发布消息 \n
+   * 函数定义格式:ros::Publisher 函数名=节点句柄.advertise<消息类型>(const std::string& topic, uint32_t queue_size,const SubscriberStatusCallback& connect_cb, 
+   * bool  latch = false）;
+   * topic：话题名称,格式为："字符串"； \n
+   * queue_size：消息队列尺寸，等待发送到订阅服务器的最大发送消息数； \n
+   * latch：布尔型变量,(可选)如果为真，则在此主题上发布的最后一条消息将被保存，并在新订阅者连接时发送给他们； \n
+   * 
+   * ## 创建服务
+   * advertiseService()函数创建一项服务 \n
+   * 函数定义格式：ros::ServiceServer 服务节点名 = 节点句柄.advertiseService(const std::string& service, const boost::function<bool(S&)>& callback, 
+   * const VoidConstPtr &tracked_object = VoidConstPtr()) \n
+   * service：服务节点名称； \n
+   * callback：调用服务时调用的回调函数，即该服务提供的特定操作； \n
+   * tracked_object：一个指向对象的共享指针，用于跟踪这些回调。如果设置了，将为该对象创建一个weak_ptr，如果引用计数为0，则不会调用订阅方回调。请注意，设置此设置将导致
+   * 在回调之前向对象添加新的引用，并使其在调用回调的代码路径(因此也就是线程)中超出范围(并可能被删除)。 \n
+   * 
+   * ## 订阅消息并调用回调函数
+   * message_filters::Subscriber()函数订阅一个消息 \n
+   * 函数定义格式：void message_filters::Subscriber< 消息类型 >::subscribe ( ros::NodeHandle &nh,const std::string &topic,uint32_t queue_size,
+   * const ros::TransportHints &transport_hints = ros::TransportHints(),ros::CallbackQueueInterface *callback_queue = 0) 
+   * nh：节点句柄 \n
+   * topic：要订阅的话题 \n
+   * queue_size：订阅队列大小 \n
+   * transport_hints：要传递的传输提示 \n
+   * callback_queue：要传递的回调队列 \n
+   * tf::MessageFilter()函数订阅了一个消息，并将其缓存，直到这些消息转换到目标坐标系，然后将这些消息在回调函数中进行处理。 \n
+   * 函数定义格式：tf::MessageFilter<消息类型>::MessageFilter( F&f,Transformer& tf,const std::string& target_frame, uint32_t queue_size, 
+   * ros::NodeHandle nh = ros::NodeHandle(), ros::Duration max_rate) 	\n
+   * f:输入的数据 \n
+   * tf:坐标转换的方式 \n
+   * target_frame:需要转换到的坐标系 \n
+   * queue_size:在丢弃旧消息之前要排队的消息数 \n
+   * 
+   * ##订阅的消息、发布的话题以及服务
+   * 名称                         | 类型      | 说明 
+   * ----------------------------|----------|--------------------
+   * occupied_cells_vis_array    | 发布的消息 | 发布MarkerArray类型的消息
+   * octomap_binary              | 发布的消息 | 发布Octomap类型的消息
+   * octomap_full                | 发布的消息 | 发布Octomap类型的消息
+   * octomap_point_cloud_centers | 发布的消息 | 发布PointCloud2类型的消息
+   * projected_map               | 发布的消息 | 发布OccupancyGrid类型的消息
+   * free_cells_vis_array        | 发布的消息 | 发布MarkerArray类型的消息
+   * cloud_in                    | 订阅的消息 | 订阅PointCloud2类型的消息
+   * octomap_binary              | 发布的服务 | 调用octomapBinarySrv函数
+   * octomap_full                | 发布的服务 | 调用octomapFullSrv函数
+   * clear_bbx                   | 发布的服务 | 调用clearBBXSrv函数
+   * reset                       | 发布的服务 | 调用resetSrv函数
+   * 
+   * @param[in] private_nh_ NodeHandle类型的开始节点，通过.launch文件给函数内的参数传递消息
+   */
 OctomapServer::OctomapServer(ros::NodeHandle private_nh_)
 : m_nh(),
   m_pointCloudSub(NULL),
@@ -258,7 +297,17 @@ bool OctomapServer::openFile(const std::string& filename){
   return true;
 
 }
-
+/**
+ * @brief insertCloudCallback是tf::MessageFilter下的回调函数，它订阅了PointCloud2类型的消息，在回调函数，即该函数对收到的消息进行坐标转换，即将点从雷达的坐标系转换
+ * 到世界地图的坐标系中。在进行坐标转换之前，需要对收到的点信息进行直通过滤，即过滤掉超出在雷达坐标系下所设定的x、y、z坐标范围。其次，设置一个坐标转换的监听变量，来实时的监听
+ * 从雷达坐标系到世界坐标系的坐标转换关系，并存储到类型为StampedTransfrom的变量中，并将这个变量用矩阵的形式表示出来，易于将点云进行坐标转换的计算。在进行点云转换时，有两种
+ * 方式进行转换，第一是直接建立雷达坐标系与世界的坐标系之间的关系，并直接转换；第二是先建立雷达与机器人的坐标系，然后建立机器人与世界的坐标系之间的关系，即先将点云转换到机器人
+ * 坐标系中，再转换到世界坐标系中。再次，如果是将点云通过两次坐标系的转换，则是需要先将点云从雷达坐标系转换到机器人坐标系，再将这些点进行分割，分割为地面的点和非地面的点，分割
+ * 完毕后再将这些点转换到世界坐标系。如果将点云只进行一次坐标系的转换，则是不对这些点进行分割，直接将点云数据从雷达坐标系转换到机器人坐标系中。从此，将点云数据转换到世界坐标系
+ * 中后，就将点云插入到现有的八分树数据结构当中。最后，发布点云数据。
+ * 
+ * @param cloud 通过订阅消息得到的需要进行坐标转换的点云数据
+ */
 void OctomapServer::insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr& cloud){
   ros::WallTime startTime = ros::WallTime::now();
 
@@ -281,7 +330,7 @@ void OctomapServer::insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr
   pcl_ros::transformAsMatrix(sensorToWorldTf, sensorToWorld);
 
 
-  // set up filter for height range, also removes NANs:
+  // 设置直通滤波的参数
   pcl::PassThrough<PCLPoint> pass_x;
   pass_x.setFilterFieldName("x");
   pass_x.setFilterLimits(m_pointcloudMinX, m_pointcloudMaxX);
@@ -353,6 +402,18 @@ void OctomapServer::insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr
   publishAll(cloud->header.stamp);
 }
 
+/**
+ * @brief 将点云数据从雷达坐标系转换到世界坐标系以后，就需要将点云进行插入到八分树当中，inserScan()函数就是实现了该功能。在对点云进行处理时，并不只是将雷达获取的点插入到在世界
+ * 坐标系下对应的体素格子，而是先计算出从雷达坐标系原点位置到获取点所穿过的所有体素格，并把这些格标记为free，即没有物体，然后再将获取到的点对应的格记为occupied，即存在物体。除此
+ * 之外，我们还设定了一个范围，我们只对该范围内的点云数据进行处理。因此，我们将插入的点分为以下四种情况：如果点被认为是地面的点并且该点在范围内，则将雷达原点到地面的点，包括地面的点，
+ * 所占的体素格认为是free；如果点被认为是地面的点但是该店在范围外，则将雷达原点到地面点在该范围内的点对应的体素格认为是free；如果点被认为是非地面的点并且该点在范围内，则将雷达原点
+ * 到该点之间所占的体素格认为是free，该点所占的体素格认为是occupied；如果点被认为是非地面的点并且该点在范围外，则将雷达原点到该点之间所占的体素格并在范围内的点认为是free。然后通
+ * 过二值贝叶斯概率公式将该点对应的体素格进行更新。最后，将点云数据进行发布。
+ * 
+ * @param sensorOriginTf 坐标转换的原点
+ * @param ground 通过SAC分割认为是地面的坐标点
+ * @param nonground 通过SAC分割认为不是地面的坐标点
+ */ 
 void OctomapServer::insertScan(const tf::Point& sensorOriginTf, const PCLPointCloud& ground, const PCLPointCloud& nonground){
   point3d sensorOrigin = pointTfToOctomap(sensorOriginTf);
 
@@ -480,7 +541,11 @@ void OctomapServer::insertScan(const tf::Point& sensorOriginTf, const PCLPointCl
 }
 
 
-
+/**
+ * @brief 根据参数的设置发布点云数据。
+ * 
+ * @param rostime 获得ROS系统的时间
+ */
 void OctomapServer::publishAll(const ros::Time& rostime){
   ros::WallTime startTime = ros::WallTime::now();
   size_t octomapSize = m_octree->size();
@@ -713,7 +778,7 @@ bool OctomapServer::octomapBinarySrv(OctomapSrv::Request  &req,
     return false;
 
   double total_elapsed = (ros::WallTime::now() - startTime).toSec();
-  ROS_INFO("Binary octomap sent in %f sec", total_elapsed);
+  ROS_INFO("Binary octomap sent in %fservice sec", total_elapsed);
   return true;
 }
 
@@ -821,7 +886,22 @@ void OctomapServer::publishFullOctoMap(const ros::Time& rostime) const{
 
 }
 
-
+/**
+ * @brief 该函数的基本作用是将点云数据进行分割，分割成为地面的点和非地面的点，其中使用的分割算法为RANSAC
+ * RANSAC功能：从点云数据中提取出符合给定特征的点的集合 \n
+ * 原理：重复以下步骤指定次数： \n
+ * 1. 从点云中随机选取少量点作为初始内集 \n
+ * 2. 对这个内集拟合一个模型 \n
+ * 3. 通过由模型确定的损失函数，将点云中所有其他的点与模型进行匹配测试，匹配度高的点加入内集，构成一致集(consensus set) \n
+ * 4. 如果有足够多的点被归类于一致集中，则这个模型被认为是好的 \n
+ * 5. 之后，通过对一致集中所有的点进行再次评估，我们可能能够提高模型的质量 \n
+ * 上面的步骤重复的次数由用户指定，需要拟合的模型（圆柱体、平面。。。）也是由用户确定的。上面的步骤的重复要么会长生由于一致集中包含的点太少而被舍弃的模型，要么
+ * 会产生一个被修正的模型以及相应的一致集的大小。在后者的情况下，若其一致集的大小比上一次得到的模型的一致集大，则保留这一次的模型
+ * 
+ * @param[in] pc 需要分割的点云
+ * @param[in] ground 地面的点
+ * @param[in] nonground 非地面的点
+ */
 void OctomapServer::filterGroundPlane(const PCLPointCloud& pc, PCLPointCloud& ground, PCLPointCloud& nonground) const{
   ground.header = pc.header;
   nonground.header = pc.header;
