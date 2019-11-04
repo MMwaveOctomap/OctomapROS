@@ -1,30 +1,73 @@
-/*
- * Copyright (c) 2010-2013, A. Hornung, University of Freiburg
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- *     * Redistributions of source code must retain the above copyright
- *       notice, this list of conditions and the following disclaimer.
- *     * Redistributions in binary form must reproduce the above copyright
- *       notice, this list of conditions and the following disclaimer in the
- *       documentation and/or other materials provided with the distribution.
- *     * Neither the name of the University of Freiburg nor the names of its
- *       contributors may be used to endorse or promote products derived from
- *       this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
+/** @file OctomapServer.h
+ * @version 1.0.0
+ * @author yzc
+ * @brief 将建图算法通过ROS的机制原理进行实现
+ * @section  ROS介绍
+ * ROS是用于编写机器人软件程序的一种具有高度灵活性的软件架构，是一个适用于机器人的开源的元操作系统。 ROS是开源的，是用于机器人的一种后操作系统，或者说次级操作系统。它提供类似
+ * 操作系统所提供的功能，包含硬件抽象描述、底层驱动程序管理、共用功能的执行、程序间的消息传递、程序发行包管理，它也提供一些工具程序和库用于获取、建立、编写和运行多机整合的程序。
+ * ROS是一个分布式的进程框架，每个进程被封装在易于被分享和发布的程序包和功能包中。
+ * ## 节点
+ * 作为ROS系统的核心，节点是用C++或Python（ROS客户端库roscpp、rospy）编写的程序，用来执行任务或进程。
+ * ## 消息
+ * 节点之间通过消息进行通信，这些消息包含一个节点发送给其他节点的信息数据，消息类型有ROS标准类型和基于标准消息开发的自定义类型两种。
+ * ## 主题
+ * 有些书籍翻译为话题，指节点发布的消息的去处。节点每一条消息都要发布到主题，一个节点a发布信息数据，就说该节点a向主题发布消息。其他节点可以订阅这个节点a发布的主题，以
+ * 此来接收a的消息。所以归根结底节点之间的通信，是主题之间的发布和订阅实现的。
+ * ## 服务
+ * 名称唯一，由用户开发，节点不提供标准服务（因为你的节点本身是用客户端库编写的），如果你想获得某个节点的请求和应答，即直接与某个节点交互，只能使用服务。当然，这些服务
+ * 是节点提供的服务，如果节点没有提供服务，我们就无法请求和获取应答。
+ * 
+ * @section 功能介绍
+ * OctomapSever主要将建图算法通过ROS的机制原理进行实现。
+ * 
+ * @section 参数
+ * 
+ * 名称                         | 类型                                                   | 说明|
+ * ----------------------------|--------------------------------------------------------|-----|
+ * m_nh                        | ros::NodeHandle                                        | |
+ * m_pointCloudSub             | message_filters::Subscriber<sensor_msgs::PointCloud2>* ||
+ * m_tfPointCloudSub           | tf::MessageFilter<sensor_msgs::PointCloud2>*           ||
+ * m_tfListener                | tf::TransformListener                                  ||
+ * m_octree                    | OcTreeT*                                               | 八分树|
+ * m_keyRay                    | octomap::KeyRay                                        ||
+ * m_updateBBXMin              | octomap::OcTreeKey                                     ||
+ * m_updateBBXMax              | octomap::OcTreeKey                                     ||
+ * m_maxRange                  | double                                                 ||
+ * m_worldFrameId              | string                                                 | 世界坐标系|
+ * m_baseFrameId               | string                                                 | 机器人坐标系|
+ * m_useHeightMap              | bool                                                   ||
+ * m_color                     | std_msgs::ColorRGBA                                    ||
+ * m_colorFree                 | std_msgs::ColorRGBA                                    ||
+ * m_colorFactor               | double                                                 ||
+ * m_latchedTopics             | bool                                                   | |
+ * m_publishFreeSpace          | bool                                                   | |
+ * m_res                       | double                                                 ||
+ * m_treeDepth                 | unsigned                                               | 八分树深度|
+ * m_maxTreeDepth              | unsigned                                               | 八分树最大深度|
+ * m_pointcloudMinX            | double                                                 | 点云范围坐标值x的最小值|
+ * m_pointcloudMaxX            | double                                                 | 点云范围坐标值x的最大值|
+ * m_pointcloudMinY            | double                                                 | 点云范围坐标值y的最小值|
+ * m_pointcloudMaxY            | double                                                 | 点云范围坐标值y的最大值|
+ * m_pointcloudMinZ            | double                                                 | 点云范围坐标值z的最小值|
+ * m_pointcloudMaxZ            | double                                                 | 点云范围坐标值z的最大值|
+ * m_occupancyMinZ             | double                                                 ||
+ * m_occupancyMaxZ             | double                                                 ||
+ * m_minSizeX                  | double                                                 ||
+ * m_minSizeY                  | double                                                 ||
+ * m_filterSpeckles            | bool                                                   ||
+ * m_filterGroundPlane         | bool                                                   ||
+ * m_groundFilterDistance      | double                                                 ||
+ * m_groundFilterAngle         | double                                                 ||
+ * m_groundFilterPlaneDistance | double                                                 ||
+ * m_compressMap               | bool                                                   ||
+ * m_initConfig                | bool                                                   ||
+ * m_incrementalUpdate         | bool                                                   ||
+ * m_gridmap                   | nav_msgs::OccupancyGrid                                ||
+ * m_publish2DMap              | bool                                                   ||
+ * m_mapOriginChanged          | bool                                                   ||
+ * m_paddedMinKey              | octomap::OcTreeKey                                     ||
+ * m_multires2DScale           | unsigned                                               ||
+ * m_projectCompleteMap        | bool                                                   ||
  */
 
 #ifndef OCTOMAP_SERVER_OCTOMAPSERVER_H
@@ -73,6 +116,11 @@
 #endif
 
 namespace octomap_server {
+
+/**
+ * @class OctomapSever OctomapSever.h
+ * @brief OctomapSever类根据ROS的原理框架实现了Octomap建图算法。
+ */
 class OctomapServer {
 
 public:
@@ -90,17 +138,32 @@ public:
 
   OctomapServer(ros::NodeHandle private_nh_ = ros::NodeHandle("~"));
   virtual ~OctomapServer();
+
+  
   virtual bool octomapBinarySrv(OctomapSrv::Request  &req, OctomapSrv::GetOctomap::Response &res);
+
+  
   virtual bool octomapFullSrv(OctomapSrv::Request  &req, OctomapSrv::GetOctomap::Response &res);
+
+ 
   bool clearBBXSrv(BBXSrv::Request& req, BBXSrv::Response& resp);
+
+  
   bool resetSrv(std_srvs::Empty::Request& req, std_srvs::Empty::Response& resp);
 
+  /**
+   * @brief insertCloudCallback函数的功能是将点云数据从雷达坐标系转换到世界坐标系中，并按照贝叶斯二值概率公式更新对应体素的值，最后发布这些点云数据供之后的进程进行使用。
+   */
   virtual void insertCloudCallback(const sensor_msgs::PointCloud2::ConstPtr& cloud);
+
+  
   virtual bool openFile(const std::string& filename);
 
 protected:
+
+  
   inline static void updateMinKey(const octomap::OcTreeKey& in, octomap::OcTreeKey& min) {
-    for (unsigned i = 0; i < 3; ++i)
+    for (unsigned i = 0; i < 3; ++m_nhi)
       min[i] = std::min(in[i], min[i]);
   };
 
@@ -126,16 +189,20 @@ protected:
   virtual void publishAll(const ros::Time& rostime = ros::Time::now());
 
   /**
-  * @brief update occupancy map with a scan labeled as ground and nonground.
-  * The scans should be in the global map frame.
+  * @brief 根据点云是否是地面将点云插入到世界坐标系中
   *
-  * @param sensorOrigin origin of the measurements for raycasting
-  * @param ground scan endpoints on the ground plane (only clear space)
-  * @param nonground all other endpoints (clear up to occupied endpoint)
+  * @param sensorOrigin 传感器的位置
+  * @param ground 点云数据是地面
+  * @param nonground 点云数据不是地面
   */
   virtual void insertScan(const tf::Point& sensorOrigin, const PCLPointCloud& ground, const PCLPointCloud& nonground);
 
-  /// label the input cloud "pc" into ground and nonground. Should be in the robot's fixed frame (not world!)
+  /**
+  * @brief 将点云数据分为地面和非地面
+  * @param pc 需要处理的数据
+  * @param 
+  * @return
+  */
   void filterGroundPlane(const PCLPointCloud& pc, PCLPointCloud& ground, PCLPointCloud& nonground) const;
 
   /**

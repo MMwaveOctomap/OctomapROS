@@ -16,7 +16,7 @@
 负责人： 张冠华
 
 ### 5. OcTreeBaseImpl
-> /home/zgh/workspace/octomap_src/octomap-devel/octomap/include/octomap/OcTreeBaseImpl.hxx
+> /octomap-devel/octomap/include/octomap/OcTreeBaseImpl.hxx
 负责人： 欧阳德光
 
 ### 6. Overwrite package

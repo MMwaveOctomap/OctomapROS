@@ -13,6 +13,7 @@ lib
 bin
 build
 callgrind.out*
+cmake-build-debug
 
 # in case someone runs an in-source build:
 CMakeCache.txt

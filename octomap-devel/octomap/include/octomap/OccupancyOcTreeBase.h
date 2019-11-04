@@ -48,213 +48,154 @@
 namespace octomap {
 
   /**
-   * Base implementation for Occupancy Octrees (e.g. for mapping).
-   * AbstractOccupancyOcTree serves as a common
-   * base interface for all these classes.
-   * Each class used as NODE type needs to be derived from
+   * \brief OccupancyOcTreeBase类，根据点云或其他数据构造八叉树
+   * Occupancy Octrees 的基本实现(e.g. for mapping).
+   * AbstractOccupancyOcTree 提供了接口
+   * 使用的结点需要继承自
    * OccupancyOcTreeNode.
    *
-   * This tree implementation has a maximum depth of 16. 
-   * At a resolution of 1 cm, values have to be < +/- 327.68 meters (2^15)
+   * 树的最大深度为16
+   * 在分辨率未1cm时，最大值 max_val < +/- 327.68 meters (2^15)
+   * 这个限制是的我们可以用二进制表示数据，以此采用更加高效的key生成方法
    *
-   * This limitation enables the use of an efficient key generation 
-   * method which uses the binary representation of the data.
+   * \note 这个树不存储单独的点，而是存储八叉树的结点
    *
-   * \note The tree does not save individual points.
-   *
-   * \tparam NODE Node class to be used in tree (usually derived from
+   * \tparam NODE 结点类(一般继承自
    *    OcTreeDataNode)
    */
   template <class NODE>
   class OccupancyOcTreeBase : public OcTreeBaseImpl<NODE,AbstractOccupancyOcTree> {
 
   public:
-    /// Default constructor, sets resolution of leafs
+    /// 默认构造函数，设置叶子结点分辨率
     OccupancyOcTreeBase(double resolution);
     virtual ~OccupancyOcTreeBase();
 
-    /// Copy constructor
+    /// 拷贝构造函数
     OccupancyOcTreeBase(const OccupancyOcTreeBase<NODE>& rhs);
 
     /**
-    * Integrate a Pointcloud (in global reference frame), parallelized with OpenMP.
-    * Special care is taken that each voxel
-    * in the map is updated only once, and occupied nodes have a preference over free ones.
-    * This avoids holes in the floor from mutual deletion and is more efficient than the plain
-    * ray insertion in insertPointCloudRays().
-    *
-    * @note replaces insertScan()
-    *
-    * @param scan Pointcloud (measurement endpoints), in global reference frame
-    * @param sensor_origin measurement origin in global reference frame
-    * @param maxrange maximum range for how long individual beams are inserted (default -1: complete beam)
-    * @param lazy_eval whether update of inner nodes is omitted after the update (default: false).
-    *   This speeds up the insertion, but you need to call updateInnerOccupancy() when done.
-    * @param discretize whether the scan is discretized first into octree key cells (default: false).
-    *   This reduces the number of raycasts using computeDiscreteUpdate(), resulting in a potential speedup.*
-    */
+     * 插入并合并点云, 使用 OpenMP进行并行计算.
+     * 注意每个小块只被更新一遍，而且相比free nodes(空节点）更多倾向occupied nodes（占据节点)。
+     * 这可以避免由于相互删除使得地面上出现洞，而且比insertPointCloudRays()中直接的ray insertion更有效率。
+     * @note 替代了insertScan()
+     * @param scan 扫描的点云(相对于全局参考帧）
+     * @param sensor_origin 传感器的原点坐标
+     * @param maxrange 被插入的波的最大探测长度 (default -1: 全部探测长度)
+     * @param lazy_eval 是否等待所有结点更新后提交本次更改（default：false),可以加速插入，但需要结束之后调用updateInnerOccupancy。
+     * @param discretize 事发欧在scan第一次离散化到octree key单元（default： false） 这可以减少computeDiscreteUpdate()中raycasts的数目，导致潜在的效率提升
+     */
     virtual void insertPointCloud(const Pointcloud& scan, const octomap::point3d& sensor_origin,
                    double maxrange=-1., bool lazy_eval = false, bool discretize = false);
 
-    /**
-    * Integrate a 3d scan (transform scan before tree update), parallelized with OpenMP.
-    * Special care is taken that each voxel
-    * in the map is updated only once, and occupied nodes have a preference over free ones.
-    * This avoids holes in the floor from mutual deletion and is more efficient than the plain
-    * ray insertion in insertPointCloudRays().
-    *
-    * @note replaces insertScan()
-    *
-    * @param scan Pointcloud (measurement endpoints) relative to frame origin
-    * @param sensor_origin origin of sensor relative to frame origin
-    * @param frame_origin origin of reference frame, determines transform to be applied to cloud and sensor origin
-    * @param maxrange maximum range for how long individual beams are inserted (default -1: complete beam)
-    * @param lazy_eval whether update of inner nodes is omitted after the update (default: false).
-    *   This speeds up the insertion, but you need to call updateInnerOccupancy() when done.
-    * @param discretize whether the scan is discretized first into octree key cells (default: false).
-    *   This reduces the number of raycasts using computeDiscreteUpdate(), resulting in a potential speedup.*
-    */
+     /**
+      * 插入并合并点云, 使用 OpenMP进行并行计算.
+      * 注意每个小块只被更新一遍，而且相比free nodes(空节点）更多倾向occupied nodes（占据节点)。
+      * 这可以避免由于相互删除使得地面上出现洞，而且比insertPointCloudRays()中直接的ray insertion更有效率。
+      * @note 替代了insertScan()
+      * @param scan 扫描的点云
+      * @param sensor_origin 传感器的原点坐标
+      * @param frame_origin 参考帧的原点，决定了对点云和sensor_origin进行的坐标变换
+      * @param maxrange 被插入的波的最大探测长度 (default -1: 全部探测长度)
+      * @param lazy_eval 是否等待所有结点更新后提交本次更改（default：false),可以加速插入，但需要结束之后调用updateInnerOccupancy。
+      * @param discretize 事发欧在scan第一次离散化到octree key单元（default： false） 这可以减少computeDiscreteUpdate()中raycasts的数目，导致潜在的效率提升
+      */
     virtual void insertPointCloud(const Pointcloud& scan, const point3d& sensor_origin, const pose6d& frame_origin,
                    double maxrange=-1., bool lazy_eval = false, bool discretize = false);
 
-    /**
-    * Insert a 3d scan (given as a ScanNode) into the tree, parallelized with OpenMP.
-    *
-    * @note replaces insertScan
-    *
-    * @param scan ScanNode contains Pointcloud data and frame/sensor origin
-    * @param maxrange maximum range for how long individual beams are inserted (default -1: complete beam)
-    * @param lazy_eval whether the tree is left 'dirty' after the update (default: false).
-    *   This speeds up the insertion by not updating inner nodes, but you need to call updateInnerOccupancy() when done.
-    * @param discretize whether the scan is discretized first into octree key cells (default: false).
-    *   This reduces the number of raycasts using computeDiscreteUpdate(), resulting in a potential speedup.
-    */
-    virtual void insertPointCloud(const ScanNode& scan, double maxrange=-1., bool lazy_eval = false, bool discretize = false);
+     /**
+      * 插入3d scan并合并点云, 使用 OpenMP进行并行计算.
+      *
+      * @note 与前两个参数大致相同
+      *
+      * @param scan ScanNode包含点云数据和frame/sensor 原点信息（即位姿pose）
+      */
+     virtual void insertPointCloud(const ScanNode& scan, double maxrange=-1., bool lazy_eval = false, bool discretize = false);
 
-    /**
-     * Integrate a Pointcloud (in global reference frame), parallelized with OpenMP.
-     * This function simply inserts all rays of the point clouds as batch operation.
-     * Discretization effects can lead to the deletion of occupied space, it is
-     * usually recommended to use insertPointCloud() instead.
-     *
-     * @param scan Pointcloud (measurement endpoints), in global reference frame
-     * @param sensor_origin measurement origin in global reference frame
-     * @param maxrange maximum range for how long individual beams are inserted (default -1: complete beam)
-     * @param lazy_eval whether update of inner nodes is omitted after the update (default: false).
-     *   This speeds up the insertion, but you need to call updateInnerOccupancy() when done.
-     */
+     /**
+      * 插入并合并点云, 使用 OpenMP进行并行计算.
+      * 简单的以批处理方式将点云插入tree中。
+      * 离散化的影响会导致一些occupied空间被误删除，所以建议使用insertPointCloud()来代替。
+      * @param 参数与之前插入点云函数相同
+      */
      virtual void insertPointCloudRays(const Pointcloud& scan, const point3d& sensor_origin, double maxrange = -1., bool lazy_eval = false);
 
      /**
-      * Set log_odds value of voxel to log_odds_value. This only works if key is at the lowest
-      * octree level
+      * 设置某个体积元素(八叉树节点）的log_odds value，只有当key是最小体积元素的时候才能设置
       *
-      * @param key OcTreeKey of the NODE that is to be updated
-      * @param log_odds_value value to be set as the log_odds value of the node
-      * @param lazy_eval whether update of inner nodes is omitted after the update (default: false).
-      *   This speeds up the insertion, but you need to call updateInnerOccupancy() when done.
-      * @return pointer to the updated NODE
+      * @param key 待更新节点的OcTreeKey
+      * @param log_odds_value 节点要被设定的log_odds值
+      * @param lazy_eval 是否更新提交后马上更新内部节点，默认不开启，立即更新内部节点，关闭可提高插入效率，但需要自己调用更新节点函数
+      * @return 更新结束的节点指针
       */
      virtual NODE* setNodeValue(const OcTreeKey& key, float log_odds_value, bool lazy_eval = false);
 
      /**
-      * Set log_odds value of voxel to log_odds_value.
-      * Looks up the OcTreeKey corresponding to the coordinate and then calls setNodeValue() with it.
-      *
-      * @param value 3d coordinate of the NODE that is to be updated
-      * @param log_odds_value value to be set as the log_odds value of the node
-      * @param lazy_eval whether update of inner nodes is omitted after the update (default: false).
-      *   This speeds up the insertion, but you need to call updateInnerOccupancy() when done.
-      * @return pointer to the updated NODE
+      * 设置某个体积元素(八叉树节点）的log_odds value。
+      * 找到坐标在八叉树中对应的key的值并设置其log_odds_value
+      * @param value 需要更新节点的三维坐标
+      * @param log_odds_value 节点要被设定的log_odds值
+      * @param lazy_eval 是否更新提交后马上更新内部节点，默认不开启，立即更新内部节点，关闭可提高插入效率，但需要自己调用更新节点函数
+      * @return 更新结束的节点指针
       */
      virtual NODE* setNodeValue(const point3d& value, float log_odds_value, bool lazy_eval = false);
 
-     /**
-      * Set log_odds value of voxel to log_odds_value.
-      * Looks up the OcTreeKey corresponding to the coordinate and then calls setNodeValue() with it.
-      *
-      * @param x
-      * @param y
-      * @param z
-      * @param log_odds_value value to be set as the log_odds value of the node
-      * @param lazy_eval whether update of inner nodes is omitted after the update (default: false).
-      *   This speeds up the insertion, but you need to call updateInnerOccupancy() when done.
-      * @return pointer to the updated NODE
-      */
+      /**
+       * 设置某个体积元素(八叉树节点）的log_odds value。
+       * 找到坐标在八叉树中对应的key的值并设置其log_odds_value
+       * @param 坐标 x y z 即需要更新节点的三维坐标
+       * @param log_odds_value 节点要被设定的log_odds值
+       * @param lazy_eval 是否更新提交后马上更新内部节点，默认不开启，立即更新内部节点，关闭可提高插入效率，但需要自己调用更新节点函数
+       * @return 更新结束的节点指针
+       */
      virtual NODE* setNodeValue(double x, double y, double z, float log_odds_value, bool lazy_eval = false);
 
      /**
-      * Manipulate log_odds value of a voxel by changing it by log_odds_update (relative).
-      * This only works if key is at the lowest octree level
-      *
-      * @param key OcTreeKey of the NODE that is to be updated
-      * @param log_odds_update value to be added (+) to log_odds value of node
-      * @param lazy_eval whether update of inner nodes is omitted after the update (default: false).
-      *   This speeds up the insertion, but you need to call updateInnerOccupancy() when done.
-      * @return pointer to the updated NODE
+      * 通过log_odds_update去操作一个体积元素(节点）的log_odds value,只有当该节点的key是最小体积元素时生效。
+      * @param key 待更新节点的OcTreeKey
+      * @param log_odds_update 加到节点log_odds_value上的值
+      * @param lazy_eval 是否更新提交后马上更新内部节点，默认不开启，立即更新内部节点，关闭可提高插入效率，但需要自己调用更新节点函数
+      * @return 更新结束的节点指针
       */
      virtual NODE* updateNode(const OcTreeKey& key, float log_odds_update, bool lazy_eval = false);
 
-     /**
-      * Manipulate log_odds value of a voxel by changing it by log_odds_update (relative).
-      * Looks up the OcTreeKey corresponding to the coordinate and then calls updateNode() with it.
-      *
-      * @param value 3d coordinate of the NODE that is to be updated
-      * @param log_odds_update value to be added (+) to log_odds value of node
-      * @param lazy_eval whether update of inner nodes is omitted after the update (default: false).
-      *   This speeds up the insertion, but you need to call updateInnerOccupancy() when done.
-      * @return pointer to the updated NODE
-      */
+      /**
+       * 通过log_odds_update去操作一个体积元素(节点）的log_odds value,只有当该节点的key是最小体积元素时生效。
+       * @param value 需要更新节点的三维坐标
+       * @param log_odds_update 加到节点log_odds_value上的值
+       * @param lazy_eval 是否更新提交后马上更新内部节点，默认不开启，立即更新内部节点，关闭可提高插入效率，但需要自己调用更新节点函数
+       * @return 更新结束的节点指针
+       */
      virtual NODE* updateNode(const point3d& value, float log_odds_update, bool lazy_eval = false);
 
-     /**
-      * Manipulate log_odds value of a voxel by changing it by log_odds_update (relative).
-      * Looks up the OcTreeKey corresponding to the coordinate and then calls updateNode() with it.
-      *
-      * @param x
-      * @param y
-      * @param z
-      * @param log_odds_update value to be added (+) to log_odds value of node
-      * @param lazy_eval whether update of inner nodes is omitted after the update (default: false).
-      *   This speeds up the insertion, but you need to call updateInnerOccupancy() when done.
-      * @return pointer to the updated NODE
-      */
+      /**
+       * 通过log_odds_update去操作一个体积元素(节点）的log_odds value,只有当该节点的key是最小体积元素时生效。
+       * @param 坐标 x y z 即需要更新节点的三维坐标
+       * @param log_odds_update 加到节点log_odds_value上的值
+       * @param lazy_eval 是否更新提交后马上更新内部节点，默认不开启，立即更新内部节点，关闭可提高插入效率，但需要自己调用更新节点函数
+       * @return 更新结束的节点指针
+       */
      virtual NODE* updateNode(double x, double y, double z, float log_odds_update, bool lazy_eval = false);
 
     /**
-     * Integrate occupancy measurement.
+     * 合并占据节点(occupancy)的操作
      *
-     * @param key OcTreeKey of the NODE that is to be updated
-     * @param occupied true if the node was measured occupied, else false
-     * @param lazy_eval whether update of inner nodes is omitted after the update (default: false).
-     *   This speeds up the insertion, but you need to call updateInnerOccupancy() when done.
-     * @return pointer to the updated NODE
+     * @param key 待更新节点的OcTreeKey
+     * @param occupied 该节点是否被标记为有物体占据(occupied)
+     * @param lazy_eval 是否更新提交后马上更新内部节点，默认不开启，立即更新内部节点，关闭可提高插入效率，但需要自己调用更新节点函数
+     * @return 更新结束的节点指针
      */
     virtual NODE* updateNode(const OcTreeKey& key, bool occupied, bool lazy_eval = false);
 
     /**
-     * Integrate occupancy measurement.
-     * Looks up the OcTreeKey corresponding to the coordinate and then calls udpateNode() with it.
-     *
-     * @param value 3d coordinate of the NODE that is to be updated
-     * @param occupied true if the node was measured occupied, else false
-     * @param lazy_eval whether update of inner nodes is omitted after the update (default: false).
-     *   This speeds up the insertion, but you need to call updateInnerOccupancy() when done.
-     * @return pointer to the updated NODE
+     * 合并占据节点(occupancy)的操作,根据3d坐标计算出对应的key然后调用之前的updateNode()
+     * @param value 需要更新节点的三维坐标
      */
     virtual NODE* updateNode(const point3d& value, bool occupied, bool lazy_eval = false);
 
     /**
-     * Integrate occupancy measurement.
-     * Looks up the OcTreeKey corresponding to the coordinate and then calls udpateNode() with it.
-     *
-     * @param x
-     * @param y
-     * @param z
-     * @param occupied true if the node was measured occupied, else false
-     * @param lazy_eval whether update of inner nodes is omitted after the update (default: false).
-     *   This speeds up the insertion, but you need to call updateInnerOccupancy() when done.
-     * @return pointer to the updated NODE
+     * 合并占据节点(occupancy)的操作,根据3d坐标计算出对应的key然后调用之前的updateNode()
+     * @param 坐标 x y z 需要更新节点的三维坐标
      */
     virtual NODE* updateNode(double x, double y, double z, bool occupied, bool lazy_eval = false);
 
@@ -267,37 +208,31 @@ namespace octomap {
     virtual void toMaxLikelihood();
 
     /**
-     * Insert one ray between origin and end into the tree.
-     * integrateMissOnRay() is called for the ray, the end point is updated as occupied.
-     * It is usually more efficient to insert complete pointcloudsm with insertPointCloud() or
-     * insertPointCloudRays().
-     *
-     * @param origin origin of sensor in global coordinates
-     * @param end endpoint of measurement in global coordinates
-     * @param maxrange maximum range after which the raycast should be aborted
-     * @param lazy_eval whether update of inner nodes is omitted after the update (default: false).
-     *   This speeds up the insertion, but you need to call updateInnerOccupancy() when done.
-     * @return success of operation
+     * 将坐标原点origin与终点end之间的扫描线插入到树中
+     * integrateMissOnRay()会被调用，终点end point会被更新为已占据(occupied),通常使用之前的insertPointCloud()等函数插入效率更高。
+     * @param origin 全局坐标系下的传感器的原点
+     * @param end 全局坐标系下的检测到物体点的终点
+     * @param maxrange 最大距离，超出部分不会进行raycast
+     * @param lazy_eval 是否更新提交后马上更新内部节点，默认不开启，立即更新内部节点，关闭可提高插入效率，但需要自己调用更新节点函数
+     * @return 操作成功与否
+     * @retval 0 失败
+     * @retval 1 成功
      */
     virtual bool insertRay(const point3d& origin, const point3d& end, double maxrange=-1.0, bool lazy_eval = false);
     
     /**
-     * Performs raycasting in 3d, similar to computeRay(). Can be called in parallel e.g. with OpenMP
-     * for a speedup.
-     *
-     * A ray is cast from 'origin' with a given direction, the first non-free
-     * cell is returned in 'end' (as center coordinate). This could also be the 
-     * origin node if it is occupied or unknown. castRay() returns true if an occupied node
-     * was hit by the raycast. If the raycast returns false you can search() the node at 'end' and
-     * see whether it's unknown space.
-     * 
-     *
-     * @param[in] origin starting coordinate of ray
-     * @param[in] direction A vector pointing in the direction of the raycast (NOT a point in space). Does not need to be normalized.
-     * @param[out] end returns the center of the last cell on the ray. If the function returns true, it is occupied.
-     * @param[in] ignoreUnknownCells whether unknown cells are ignored (= treated as free). If false (default), the raycast aborts when an unknown cell is hit and returns false.
-     * @param[in] maxRange Maximum range after which the raycast is aborted (<= 0: no limit, default)
-     * @return true if an occupied cell was hit, false if the maximum range or octree bounds are reached, or if an unknown node was hit.
+     * 进行3d的raycast,与computeKey函数的作用过类似，能够使用OpenMP使得此函数被并行调用来加快速度。
+     * 射线从原点（origin）以给定的方向投射，路径上的第一个occupied的体积单元会作为end返回(以中心坐标形式)， 它也可以是origin节点。
+     * 如果一个被占用的节点被raycast命中，castRay()返回true。
+     * 如果raycast返回false，您可以调用search() 查看end节点，查看它是否是unkown空间。
+     * @param[in] origin 射线的起始坐标
+     * @param[in] direction 一个方向向量，没有做归一化
+     * @param[out] end 返回射线上最后一个点，如果此函数返回值为true,说明此点被占据(occupied）。
+     * @param[in] ignoreUnknownCells unkown的点是否被当做free点处理。 如果false (default), 则raycast在碰到第一个unkown点时返回false.
+     * @param[in] maxRange raycast进行的最大距离 (<= 0: 没有限制, default)
+     * @return
+     * @retval true 如果碰到了occupied的点
+     * @retval false 如果超出最大距离或者octotree的边界，或者碰到了一个unkown的点。
      */
     virtual bool castRay(const point3d& origin, const point3d& direction, point3d& end,
                  bool ignoreUnknownCells=false, double maxRange=-1.0) const;
@@ -305,80 +240,79 @@ namespace octomap {
     /**
      * Retrieves the entry point of a ray into a voxel. This is the closest intersection point of the ray
      * originating from origin and a plane of the axis aligned cube.
-     * 
-     * @param[in] origin Starting point of ray
-     * @param[in] direction A vector pointing in the direction of the raycast. Does not need to be normalized.
-     * @param[in] center The center of the voxel where the ray terminated. This is the output of castRay.
-     * @param[out] intersection The entry point of the ray into the voxel, on the voxel surface.
-     * @param[in] delta A small increment to avoid ambiguity of beeing exactly on a voxel surface. A positive value will get the point out of the hit voxel, while a negative valuewill get it inside.
-     * @return Whether or not an intesection point has been found. Either, the ray never cross the voxel or the ray is exactly parallel to the only surface it intersect.
+     * 从一个射线进入体积元素的origin起点开始遍历。找到从射线起点开始与和坐标系立方体中的平面最近的一个交叉点，
+     * @TODO intersection的具体含义与计算方法
+     * @param[in] origin 射线的起始坐标
+     * @param[in] direction 一个方向向量，没有做归一化
+     * @param[in] center 射线结束的体积空间的中心点. 即castRay的输出。
+     * @param[out] intersection 射线进入体积元素的入口点，在体积元素的表面上
+     * @param[in] delta 一个很小增量，以避免在体积元素表面上产生歧义。一个正的值将得到在体积元素之外的点，而一个负的值将得到它里面的点。
+     * @return 一个交叉点能否被找到. 或者, 射线永远不和体积元素交叉或仅平行于与它交叉的表面
+     * the ray never cross the voxel or the ray is exactly parallel to the only surface it intersect.
      */
     virtual bool getRayIntersection(const point3d& origin, const point3d& direction, const point3d& center,
                  point3d& intersection, double delta=0.0) const;
 
 		/**
-		 * Performs a step of the marching cubes surface reconstruction algorithm
-		 * to retreive the normal of the triangles that fall in the cube
-		 * formed by the voxels located at the vertex of a given voxel.
+		 * 通过立方体表面重建算法来还原落在由落在给定体积元素顶点的体积元素构成的立方体中的三角形的法线。
 		 *
-		 * @param[in] voxel for which retreive the normals
-		 * @param[out] triangles normals
-		 * @param[in] unknownStatus consider unknown cells as free (false) or occupied (default, true).
-		 * @return True if the input voxel is known in the occupancy grid, and false if it is unknown.
+		 * @param[in] voxel 需要还原法线的体积元素
+		 * @param[out] normals 三角形的法线
+		 * @param[in] unknownStatus 将未知的空间视为free (false) 或occupied (default, true).
+		 * @return
+		 * @retval True 输入的体积元素在occupied图中
+		 * @retval false 输入的体积元素未unknown.
 		 */
 		bool getNormals(const point3d& point, std::vector<point3d>& normals, bool unknownStatus=true) const;
 	
     //-- set BBX limit (limits tree updates to this bounding box)
 
-    ///  use or ignore BBX limit (default: ignore)
+    ///  使用或忽略 BBX(Bounding Box) 限制 (default: 忽略)
     void useBBXLimit(bool enable) { use_bbx_limit = enable; }
     bool bbxSet() const { return use_bbx_limit; }
-    /// sets the minimum for a query bounding box to use
+    /// 设置查询边界框能所使用的的最小值
     void setBBXMin (point3d& min);
-    /// sets the maximum for a query bounding box to use
+    /// 设置查询边界框能所使用的的最大值
     void setBBXMax (point3d& max);
-    /// @return the currently set minimum for bounding box queries, if set
+    /// @return 如果有设置，获取当前设置的边界框能所使用的的最小值
     point3d getBBXMin () const { return bbx_min; }
-    /// @return the currently set maximum for bounding box queries, if set
+    /// @return 如果有设置，获取当前设置的边界框能所使用的的最大值
     point3d getBBXMax () const { return bbx_max; }
     point3d getBBXBounds () const;
     point3d getBBXCenter () const;
-    /// @return true if point is in the currently set bounding box
+    /// @return 如果输入的p点在设置的Bounding Box 中，返回true
     bool inBBX(const point3d& p) const;
-    /// @return true if key is in the currently set bounding box
+    /// @return 如果输入的八叉树的key在设置的Bounding Box 中，返回true
     bool inBBX(const OcTreeKey& key) const;
 
     //-- change detection on occupancy:
-    /// track or ignore changes while inserting scans (default: ignore)
+    /// 跟踪或者忽略由于insert sacn同时发生的变化 (默认： 忽略)
     void enableChangeDetection(bool enable) { use_change_detection = enable; }
     bool isChangeDetectionEnabled() const { return use_change_detection; }
-    /// Reset the set of changed keys. Call this after you obtained all changed nodes.
+    /// 重新设定改变过的keys的集合。康获取到所有已改变的节点后调用。
     void resetChangeDetection() { changed_keys.clear(); }
 
     /**
-     * Iterator to traverse all keys of changed nodes.
-     * you need to enableChangeDetection() first. Here, an OcTreeKey always
-     * refers to a node at the lowest tree level (its size is the minimum tree resolution)
+     * 遍历所有已改变节点的keys的迭代器。
+     * 需要先enableChangeDetection()， 在这里，一个OcTreeKey总是指最小体积元素的节点(边长为分辨率大小）
      */
     KeyBoolMap::const_iterator changedKeysBegin() const {return changed_keys.begin();}
 
-    /// Iterator to traverse all keys of changed nodes.
+    /// 遍历所有已改变节点的keys的迭代器。
     KeyBoolMap::const_iterator changedKeysEnd() const {return changed_keys.end();}
 
-    /// Number of changes since last reset.
+    /// 上次重置后发生变化的次数
     size_t numChangesDetected() const { return changed_keys.size(); }
 
 
     /**
-     * Helper for insertPointCloud(). Computes all octree nodes affected by the point cloud
-     * integration at once. Here, occupied nodes have a preference over free
-     * ones.
-     *
-     * @param scan point cloud measurement to be integrated
-     * @param origin origin of the sensor for ray casting
-     * @param free_cells keys of nodes to be cleared
-     * @param occupied_cells keys of nodes to be marked occupied
-     * @param maxrange maximum range for raycasting (-1: unlimited)
+     * insertPointCloud()的辅助函数. 立刻计算出所有受到当前待合并点影响的节点。
+     * 这里的调用过程中，被占用的（occupied）节点比空闲节点（free)用更加高的优先级。
+     * @param scan 待并入的点云
+     * @param origin 用于ray casting的传感器原点
+     * @param free_cells 待清空节点的keys
+     * @param occupied_cells 待标为已占用(occupied)节点的keys
+     * @param maxrange raycasting的最大范围 (-1: 没有限制)
      */
     void computeUpdate(const Pointcloud& scan, const octomap::point3d& origin,
                        KeySet& free_cells,
@@ -387,17 +321,16 @@ namespace octomap {
 
 
     /**
-     * Helper for insertPointCloud(). Computes all octree nodes affected by the point cloud
-     * integration at once. Here, occupied nodes have a preference over free
-     * ones. This function first discretizes the scan with the octree grid, which results
-     * in fewer raycasts (=speedup) but a slightly different result than computeUpdate().
-     *
-     * @param scan point cloud measurement to be integrated
-     * @param origin origin of the sensor for ray casting
-     * @param free_cells keys of nodes to be cleared
-     * @param occupied_cells keys of nodes to be marked occupied
-     * @param maxrange maximum range for raycasting (-1: unlimited)
-     */
+      * insertPointCloud()的辅助函数. 立刻计算出所有受到当前待合并点影响的节点。
+      * 这里的调用过程中，被占用的（occupied）节点比空闲节点（free)用更加高的优先级。
+      * 这个函数相比上一个computeUpdate()会先使用八叉树(octree)的栅格对待合并的点云scan进行离散化，可以使得raycasts减少(提高速度)
+      * 而保持与computeUpdate()的结果大致相同。
+      * @param scan 待并入的点云
+      * @param origin 用于ray casting的传感器原点
+      * @param free_cells 待清空节点的keys
+      * @param occupied_cells 待标为已占用(occupied)节点的keys
+      * @param maxrange raycasting的最大范围 (-1: 没有限制)
+      */
     void computeDiscreteUpdate(const Pointcloud& scan, const octomap::point3d& origin,
                        KeySet& free_cells,
                        KeySet& occupied_cells,
@@ -407,54 +340,47 @@ namespace octomap {
     // -- I/O  -----------------------------------------
 
     /**
-     * Reads only the data (=complete tree structure) from the input stream.
-     * The tree needs to be constructed with the proper header information
-     * beforehand, see readBinary().
+     * 从输入流中读取完整的树结构。
+     * 重建树需要header中的一些信息, 参考readBinary().
      */
     std::istream& readBinaryData(std::istream &s);
 
     /**
-     * Read node from binary stream (max-likelihood value), recursively
-     * continue with all children.
-     *
-     * This will set the log_odds_occupancy value of
-     * all leaves to either free or occupied.
+     * 从输入流中读取完整的树结构。
+     * 重建树需要header中的一些信息, 参考readBinary().
+     * 会将所有八叉树叶子结点的log_odds_occupancy值设置为free或occupied，递归地作用于所有子节点
      */
     std::istream& readBinaryNode(std::istream &s, NODE* node);
 
     /**
-     * Write node to binary stream (max-likelihood value),
-     * recursively continue with all children.
+     * 将所有八叉树叶子结点写入二进制输出流，递归地作用于所有子节点
      *
-     * This will discard the log_odds_occupancy value, writing
-     * all leaves as either free or occupied.
+     * 会丢弃所有节点的log_odds_occupancy值，使所有节点变成全部free或occupied
      *
-     * @param s
-     * @param node OcTreeNode to write out, will recurse to all children
+     * @param s 输出流
+     * @param node 需要写出的节点，递归写其子节点
      * @return
      */
     std::ostream& writeBinaryNode(std::ostream &s, const NODE* node) const;
 
     /**
-     * Writes the data of the tree (without header) to the stream, recursively
-     * calling writeBinaryNode (starting with root)
+     * 将所有八叉树叶子结点写入二进制输出流，递归地作用于所有子节点。（从root节点开始）
      */
     std::ostream& writeBinaryData(std::ostream &s) const;
 
 
     /**
-     * Updates the occupancy of all inner nodes to reflect their children's occupancy.
-     * If you performed batch-updates with lazy evaluation enabled, you must call this
-     * before any queries to ensure correct multi-resolution behavior.
-     **/
+     * 更新所有内部节点使其反应出其子节点的占有情况(occupancy)。
+     * 如果采用lazy evaluation的批量更新， 则必须在进行任何查询前调用此函数以保证多分辨率尺度下的行为。
+     */
     void updateInnerOccupancy();
 
 
-    /// integrate a "hit" measurement according to the tree's sensor model
+    /// 根据八叉树使用的传感器的模型处理合并命中(hit)的 occupancyNode
     virtual void integrateHit(NODE* occupancyNode) const;
-    /// integrate a "miss" measurement according to the tree's sensor model
+    /// 根据八叉树使用的传感器的模型处理合并未命中(miss)的 occupancyNode
     virtual void integrateMiss(NODE* occupancyNode) const;
-    /// update logodds value of node by adding to the current value.
+    /// 通过加上update来更新节点的log_odds value
     virtual void updateNodeLogOdds(NODE* occupancyNode, const float& update) const;
 
     /// converts the node to the maximum likelihood value according to the tree's parameter for "occupancy"
@@ -463,13 +389,12 @@ namespace octomap {
     virtual void nodeToMaxLikelihood(NODE& occupancyNode) const;
 
   protected:
-    /// Constructor to enable derived classes to change tree constants.
-    /// This usually requires a re-implementation of some core tree-traversal functions as well!
+    /// 用于子类改变八叉树一些常量的构造函数
+    /// 这通常也需要一些树遍历函数的重新实现。
     OccupancyOcTreeBase(double resolution, unsigned int tree_depth, unsigned int tree_max_val);
 
     /**
-     * Traces a ray from origin to end and updates all voxels on the
-     *  way as free.  The volume containing "end" is not updated.
+     * 记录一个射线由原点到终点的路径，并将路径上的所有体积元素标记为free，含有终点end的体积元素不标记free。
      */
     inline bool integrateMissOnRay(const point3d& origin, const point3d& end, bool lazy_eval = false);
 
