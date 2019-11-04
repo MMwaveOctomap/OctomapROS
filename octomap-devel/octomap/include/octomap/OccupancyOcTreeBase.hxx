@@ -31,6 +31,54 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ *@file OccupancyOcTreeBase.hxx
+ *@author zgh
+ *@date 20191031
+ *@brief 此文件中定义了继承自OcTreeBaseImpl的OccupancyOcTree的具体实现，其中涉及到的函数被OctomapServer中更新Octree调用，用来生成map。
+ * 详细说明
+ *  ## OccupancyOcTreeBase
+ *  ### Octomap 核心
+ *  Octomap 是slam中一个常用的库，采用八叉树数据结构存储地图，相比使用点云，能够节省大量的存储空间
+ *
+ *  通过阅读octomap的github源码，发现核心代码的实现在octomap::OccupancyOcTreeBase、octomap::OcTreeBase两个类中。
+ *
+ *  其中insertPointCloud函数由OccupancyOcTreeBase类实现。
+ *
+ *  ### Octomap 优势
+ *  1. 地图形式紧凑。
+ *  > 点云地图通常规模很大，所以一个pcd文件也会很大。一张640[Math Processing Error]480的图像，会产生30万个空间点，需要大量的存储空间。即使经过一些滤波之后，pcd文件也是很大的。而且讨厌之处在于，它的“大”并不是必需的。点云地图提供了很多不必要的细节。对于地毯上的褶皱、阴暗处的影子，我们并不特别关心这些东西。把它们放在地图里是浪费空间。处理重叠的方式不够好。
+ *  2. 位姿
+ *  > 在构建点云时，我们直接按照估计位姿拼在了一起。在位姿存在误差时，会导致地图出现明显的重叠。例如一个电脑屏变成了两个，原本方的边界变成了多边形。对重叠地区的处理方式应该更好一些。
+ *  难以用于导航
+ *  3. 导航
+ *  > 说起地图的用处，第一就是导航！有了地图，就可以指挥机器人从A点到B点运动，但是，给你一张点云地图，无法直接知道哪些地方可通过，哪些地方不可通过。
+ *
+ *  ### Octomap 原理
+ *  ![八叉树示意图](https://images2015.cnblogs.com/blog/606958/201512/606958-20151212140710419-2029480818.png)
+ *  实际的数据结构，就是一个树根不断地往下扩，每次分成八个枝，直到叶子为止。叶子节点代表了分辨率最高的情况。例如分辨率设成0.01m，那么每个叶子就是一个1cm见方的小方块！
+ *  当某个节点的子结点都“占据”或“不占据”或“未确定”时，就可以把它给剪掉
+ *
+ *  ![实际八叉树建图效果](https://images2015.cnblogs.com/blog/606958/201512/606958-20151212151723856-1314940797.png)
+ *
+ *  ### 关键函数
+ *  从实现流程上来看，空间点云raycasting到OcTree的过程大致分为三步
+ *
+ *  1. 坐标系转换。需要使用pcl::transformPointCloud函数
+ *  将点云由传感器坐标系转换到世界坐标系
+ *
+ *  2. 光线追迹过程。需要使用computeRayKeys函数。
+ *  强调一下，参数origin（光束起点）和参数end（传感器末端击中点）都是世界坐标系下的坐标！
+ *  即从起点(传感器坐标系原点)到探测到路径上的点都确定为miss点
+ *  ```cpp
+ *  bool octomap::OcTreeBaseImpl< OcTreeNode , AbstractOccupancyOcTree >::computeRayKeys(const point3d & origin,const point3d & end,KeyRay & ray ) const
+ *  // Traces a ray from origin to end (excluding), returning an OcTreeKey of all nodes traversed by the beam.
+ *  ```
+ *
+ *  3. 概率更新。需要使用updateNode函数
+ *  将点云中的每一个点插入到octotree中，具体更新策略参见函数说明，原理是用的二值贝叶斯滤波过程。
+ *
+ **/
 #include <bitset>
 #include <algorithm>
 
@@ -38,6 +86,12 @@
 
 namespace octomap {
 
+/**
+ * @brief 构造函数
+ * @note 此构造函数被调用
+ * @param[in] 输入in_resolution,分辨率，即map最小立方体边长
+ * @return
+ */
   template <class NODE>
   OccupancyOcTreeBase<NODE>::OccupancyOcTreeBase(double in_resolution)
     : OcTreeBaseImpl<NODE,AbstractOccupancyOcTree>(in_resolution), use_bbx_limit(false), use_change_detection(false)
@@ -45,6 +99,19 @@ namespace octomap {
 
   }
 
+/**
+ * @brief 构造函数
+ * ...
+ * @note 此构造函数未被调用
+ * @param[in] 输入参见下表
+ * <br>
+ * 参数     | 类型     | 说明
+ * ----------|-----------|--------------------
+ * in_resolution | double | 分辨率
+ * in_tree_depth | int | 八叉树深度
+ * in_tree_max_val| int | 树中key的最大值
+ * @return 无
+ */
   template <class NODE>
   OccupancyOcTreeBase<NODE>::OccupancyOcTreeBase(double in_resolution, unsigned int in_tree_depth, unsigned int in_tree_max_val)
     : OcTreeBaseImpl<NODE,AbstractOccupancyOcTree>(in_resolution, in_tree_depth, in_tree_max_val), use_bbx_limit(false), use_change_detection(false)
