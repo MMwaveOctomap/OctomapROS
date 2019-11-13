@@ -50,21 +50,16 @@ namespace octomap {
 class AbstractOcTreeNode;
 
 /**
-   * OcTree base class, to be used with with any kind of OcTreeDataNode.
+   * OcTree的基类，可用于任意种类的OcTreeDataNode。
    *
-   * This tree implementation currently has a maximum depth of 16
-   * nodes. For this reason, coordinates values have to be, e.g.,
-   * below +/- 327.68 meters (2^15) at a maximum resolution of 0.01m.
+   * 这个树的实现当前能允许的最大深度是16. 由此，在最大分辨率为0.01米的情况下，坐标值
+   * 必须在-327.68米到+327.68米之间。
    *
-   * This limitation enables the use of an efficient key generation
-   * method which uses the binary representation of the data point
-   * coordinates.
+   * 这个限制让我们可以使用一个用用二进制来表示数据坐标点的高效的key生成方法
    *
-   * \note You should probably not use this class directly, but
-   * OcTreeBase or OccupancyOcTreeBase instead
+   * \note 你不应该直接使用这个类，而应该使用OcTreeBase或OccupancyOcTreeBase
    *
-   * \tparam NODE Node class to be used in tree (usually derived from
-   *    OcTreeDataNode)
+   * \tparam NODE 在树中使用的Node类(通常派生自OcTreeDataNode)
    * \tparam INTERFACE Interface to be derived from, should be either
    *    AbstractOcTree or AbstractOccupancyOcTree
    */
