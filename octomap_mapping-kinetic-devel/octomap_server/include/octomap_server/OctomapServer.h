@@ -172,7 +172,7 @@ protected:
       max[i] = std::max(in[i], max[i]);
   };
 
-  /// Test if key is within update area of map (2D, ignores height)
+  /// 测试key是否在map的更新区域之内(忽略高度)
   inline bool isInUpdateBBX(const OcTreeT::iterator& it) const {
     // 2^(tree_depth-depth) voxels wide:
     unsigned voxelWidth = (1 << (m_maxTreeDepth - it.getDepth()));
@@ -206,25 +206,25 @@ protected:
   void filterGroundPlane(const PCLPointCloud& pc, PCLPointCloud& ground, PCLPointCloud& nonground) const;
 
   /**
-  * @brief Find speckle nodes (single occupied voxels with no neighbors). Only works on lowest resolution!
+  * @brief 找出“斑点”节点（即没有邻居的单个被占据的体素），只能在最低分辨率下使用！
   * @param key
   * @return
   */
   bool isSpeckleNode(const octomap::OcTreeKey& key) const;
 
-  /// hook that is called before traversing all nodes
+  /// 在遍历所有节点之前调用的钩子
   virtual void handlePreNodeTraversal(const ros::Time& rostime);
 
-  /// hook that is called when traversing all nodes of the updated Octree (does nothing here)
+  /// 遍历更新之后的书中的节点前调用的钩子（在这里没有作用）
   virtual void handleNode(const OcTreeT::iterator& it) {};
 
-  /// hook that is called when traversing all nodes of the updated Octree in the updated area (does nothing here)
+  /// 遍历在更新区域之内的更新后的树上的所有节点时调用的钩子（在这里没有作用）
   virtual void handleNodeInBBX(const OcTreeT::iterator& it) {};
 
-  /// hook that is called when traversing occupied nodes of the updated Octree
+  /// 遍历在更新区域之内的被占据的节点时调用的钩子
   virtual void handleOccupiedNode(const OcTreeT::iterator& it);
 
-  /// hook that is called when traversing occupied nodes in the updated area (updates 2D map projection here)
+  /// 遍历在更新区域之内的被占据的节点时调用的钩子（在这里更新了2D地图投影）
   virtual void handleOccupiedNodeInBBX(const OcTreeT::iterator& it);
 
   /// hook that is called when traversing free nodes of the updated Octree
