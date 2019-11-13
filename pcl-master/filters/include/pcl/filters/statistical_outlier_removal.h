@@ -37,6 +37,7 @@
  *
  */
 
+
 #pragma once
 
 #include <pcl/filters/filter_indices.h>
@@ -76,8 +77,7 @@ namespace pcl
     * \author Radu Bogdan Rusu
     * \ingroup filters
     */
-  template<typename PointT>
-  class StatisticalOutlierRemoval : public FilterIndices<PointT>
+  template<typename PointT> class StatisticalOutlierRemoval : public FilterIndices<PointT>
   {
     protected:
       using PointCloud = typename FilterIndices<PointT>::PointCloud;
@@ -105,6 +105,7 @@ namespace pcl
 
       /** \brief Set the number of nearest neighbors to use for mean distance estimation.
         * \param[in] nr_k The number of points to use for mean distance estimation.
+        * \param[in] nr_k 设置用于平均距离估计的最近邻数。
         */
       inline void
       setMeanK (int nr_k)
@@ -114,6 +115,7 @@ namespace pcl
 
       /** \brief Get the number of nearest neighbors to use for mean distance estimation.
         * \return The number of points to use for mean distance estimation.
+        * \return 获取用于平均距离估计的最近邻数。
         */
       inline int
       getMeanK ()
@@ -162,8 +164,7 @@ namespace pcl
       /** \brief Filtered results are indexed by an indices array.
         * \param[out] indices The resultant indices.
         */
-      void
-      applyFilter (std::vector<int> &indices) override
+      void applyFilter (std::vector<int> &indices) override
       {
         applyFilterIndices (indices);
       }
@@ -239,7 +240,7 @@ namespace pcl
 
       /** \brief Set the standard deviation multiplier threshold. All points outside the
         * \f[ \mu \pm \sigma \cdot std\_mul \f]
-        * will be considered outliers, where \f$ \mu \f$ is the estimated mean,
+        * will be considered outliers, where $ \mu $ is the estimated mean,
         * and \f$ \sigma \f$ is the standard deviation.
         * \param std_mul the standard deviation multiplier threshold
         */
@@ -249,7 +250,7 @@ namespace pcl
         std_mul_ = std_mul;
       }
 
-      /** \brief Get the standard deviation multiplier threshold as set by the user. */
+      /** \brief 获取用户设置的标准差乘数阈值 */
       inline double
       getStddevMulThresh ()
       {
@@ -257,30 +258,49 @@ namespace pcl
       }
 
     protected:
-      /** \brief The number of points to use for mean distance estimation. */
+      /** @param The number of points to use for mean distance estimation. */
+
       int mean_k_;
 
-      /** \brief Standard deviations threshold (i.e., points outside of 
+      /** @param Standard deviations threshold (i.e., points outside of
         * \f$ \mu \pm \sigma \cdot std\_mul \f$ will be marked as outliers). 
         */
       double std_mul_;
 
-      /** \brief A pointer to the spatial search object. */
+      /** @param A pointer to the spatial search object. */
       KdTreePtr tree_;
 
-      void
-      applyFilter (std::vector<int> &indices) override;
+    /**
+     * @brief 过滤函数
+     * @note 调用此函数按照generateStatistics生成的参数规则进行过滤离群点
+     * @param indices vector<int>& 原始数据点
+     * @return NULL
+     */
+      void applyFilter (std::vector<int> &indices) override;
 
-      void
-      applyFilter (PCLPointCloud2 &output) override;
+    /**
+    * @brief 过滤函数
+    * @note 调用此函数按照generateStatistics生成的参数规则进行过滤离群点
+    * @param PCLPointCloud2 &output 原始数据点云
+    * @return NULL
+    */
+      void applyFilter (PCLPointCloud2 &output) override;
 
       /**
        * \brief Compute the statistical values used in both applyFilter methods.
        *
        * This method tries to avoid duplicate code.
        */
-      virtual void
-      generateStatistics (double& mean, double& variance, double& stddev, std::vector<float>& distances);
+    /**
+    * @brief 该函数负责生成高斯函数所需参数,1.均值; 2.标准差; 3.方差
+    * @note 此构造函数被调用
+    * @param double& mean 高斯函数所需均值参数
+    * @param double& variance 高斯函数所需方差参数
+    * @param double& stddev 高斯函数所需标准差参数
+    * @param std::vector<float>& distances) 每个原始数据点K近邻的平均值,(数组长度为indices.size())
+    * @return NULL
+    */
+      virtual void generateStatistics (double& mean, double& variance, double& stddev, std::vector<float>& distances);
   };
 }
 
