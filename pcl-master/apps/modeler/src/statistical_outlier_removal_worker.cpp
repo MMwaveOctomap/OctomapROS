@@ -77,11 +77,11 @@ pcl::modeler::StatisticalOutlierRemovalWorker::setupParameters()
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////
-void
-pcl::modeler::StatisticalOutlierRemovalWorker::processImpl(CloudMeshItem* cloud_mesh_item)
+void pcl::modeler::StatisticalOutlierRemovalWorker::processImpl(CloudMeshItem* cloud_mesh_item)
 {
   pcl::StatisticalOutlierRemoval<pcl::PointSurfel> sor;
   sor.setInputCloud(cloud_mesh_item->getCloudMesh()->getCloud());
+  // 设置K近邻的K值
   sor.setMeanK(*mean_k_);
   sor.setStddevMulThresh(*stddev_mul_thresh_);
 
