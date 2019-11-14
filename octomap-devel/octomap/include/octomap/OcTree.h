@@ -42,18 +42,18 @@
 namespace octomap {
 
   /**
-   * octomap main map data structure, stores 3D occupancy grid map in an OcTree.
-   * Basic functionality is implemented in OcTreeBase.
-   *
+   * octomap地图主数据结构，用于在OcTree中存储3D概率网格
+   * 基本功能在OcTreeBase中实现
+   * 
    */
   class OcTree : public OccupancyOcTreeBase <OcTreeNode> {
 
   public:
-    /// Default constructor, sets resolution of leafs
+    /// 默认构造器，设置了叶子节点的分辨率
     OcTree(double resolution);
 
     /**
-     * Reads an OcTree from a binary file 
+     * 从二进制文件中读取OcTree
     * @param _filename
      *
      */
@@ -70,11 +70,10 @@ namespace octomap {
 
   protected:
     /**
-     * Static member object which ensures that this OcTree's prototype
-     * ends up in the classIDMapping only once. You need this as a 
-     * static member in any derived octree class in order to read .ot
-     * files through the AbstractOcTree factory. You should also call
-     * ensureLinking() once from the constructor.
+     * 用于确保这个OcTree的原型只在classIDMapping中结束一次的静态成员对象。
+     * 任何派生于octree类中都需要包含这个静态成员，从而可以从AbstractOcTree工厂中读取.ot
+     * 文件。你也应该从构造器中调用一次ensureLinking().
+     * 
      */
     class StaticMemberInitializer{
     public:
@@ -92,7 +91,7 @@ namespace octomap {
 	    void ensureLinking() {};
     };
 
-    /// to ensure static initialization (only once)
+    /// 用于确保静态初始化（仅一次）
     static StaticMemberInitializer ocTreeMemberInit;
   };
 

@@ -227,16 +227,16 @@ protected:
   /// 遍历在更新区域之内的被占据的节点时调用的钩子（在这里更新了2D地图投影）
   virtual void handleOccupiedNodeInBBX(const OcTreeT::iterator& it);
 
-  /// hook that is called when traversing free nodes of the updated Octree
+  /// 在遍历更新后的树中的自由节点时调用的钩子
   virtual void handleFreeNode(const OcTreeT::iterator& it);
 
-  /// hook that is called when traversing free nodes in the updated area (updates 2D map projection here)
+  /// 在遍历更新区域内的节点时调用的钩子（在这里更新了2D地图投影）
   virtual void handleFreeNodeInBBX(const OcTreeT::iterator& it);
 
-  /// hook that is called after traversing all nodes
+  /// 遍历完所有的节点之后调用的钩子
   virtual void handlePostNodeTraversal(const ros::Time& rostime);
 
-  /// updates the downprojected 2D map as either occupied or free
+  /// 将向下投影的2D地图更新为被占据或自由
   virtual void update2DMap(const OcTreeT::iterator& it, bool occupied);
 
   inline unsigned mapIdx(int i, int j) const {
@@ -250,9 +250,8 @@ protected:
   }
 
   /**
-   * Adjust data of map due to a change in its info properties (origin or size,
-   * resolution needs to stay fixed). map already contains the new map info,
-   * but the data is stored according to oldMapInfo.
+   * 根据地图的info属性的变化来调整其数据（原点或者大小，分辨率需要保持不变）。地图中已经包含了
+   * 新的地图的 info, 但地图的数据却是根据旧地图来存储的
    */
 
   void adjustMapData(nav_msgs::OccupancyGrid& map, const nav_msgs::MapMetaData& oldMapInfo) const;
@@ -275,12 +274,12 @@ protected:
   dynamic_reconfigure::Server<OctomapServerConfig> m_reconfigureServer;
 
   OcTreeT* m_octree;
-  octomap::KeyRay m_keyRay;  // temp storage for ray casting
+  octomap::KeyRay m_keyRay;  // 投射射线的临时存储空间
   octomap::OcTreeKey m_updateBBXMin;
   octomap::OcTreeKey m_updateBBXMax;
 
   double m_maxRange;
-  std::string m_worldFrameId; // the map frame
+  std::string m_worldFrameId; // 地图帧
   std::string m_baseFrameId; // base of the robot for ground plane filtering
   bool m_useHeightMap;
   std_msgs::ColorRGBA m_color;
