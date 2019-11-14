@@ -31,6 +31,37 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ * @file OcTreeBaseImpl.h
+ * @author ouyang
+ * @brief 此文件中定义了八叉树地图基本数据结构八叉树的具体构建以及增删改查的具体实现
+ * 
+ * 详细说明
+ * ##八叉树
+ * 八叉树（英语：octree）是一种树形数据结构，每个内部节点都正好有八个子节点。八叉树常用于分割三维空间，将其递归细分为八个卦限。八叉树是四叉树在三维空间中的对应，在三维图形、三维游戏引擎等领域有很多应用。
+ * 
+ * ##表示空间
+ * 八叉树的每个节点都可以代表一个空间，对应的八个子节点则将这个空间细分为八个卦限。点域（point region，简称PR）八叉树的节点中都存储着一个三维点，即该节点对应区域的“中心”，也是八个子节点对应区域中的一个角落。矩阵（matrix based，简称MX）八叉树中，节点只记录区域范围，对应的中心点坐标需要从区域范围推算。因此，PR八叉树的根节点可以表示无限大的空间；而MX八叉树的根节点只能表示有限空间，这样才可以得到隐含的中心点。
+ * 
+ * ##点云地图的缺陷
+ * 在点云地图中，虽然有了三维结构，也进行了体素滤波以调整分辨率，但是点云有几个明显的缺陷：
+ * 1.点云地图通常规模很大，所以pcd文件也会很大。一幅640像素×480像素的图像，会产生30万个空间点，需要大量的存储空间。即使经过一些滤波后，pcd文件也还是很大的。而且重要的是，它的大并不是必须的。点云地图提供了很多不必要的细节。对于地毯上的褶皱，阴暗处的影子，我们并不特别关心这些东西。把它们放在地图里是在浪费空间。由于这些空间的占用，除非降低分辨率，否则在有限的内存中，无法建模较大的环境。然而降低分辨率会导致地图质量下降。
+ * 2.点云地图无法处理运动物体。因为我们的做法里只有“添加点”，而没有“当点消失时把它移除”的做法。而在实际环境中，运动物体的普遍存在，使得点云地图变得不够实用。
+ * 
+ * ##实现八叉树的原理
+ * (1). 设定最大递归深度。
+ * (2). 找出场景的最大尺寸，并以此尺寸建立第一个立方体。
+ * (3). 依序将单位元元素丢入能被包含且没有子节点的立方体。
+ * (4). 若没达到最大递归深度，就进行细分八等份，再将该立方体所装的单位元元素全部分担给八个子立方体。
+ * (5). 若发现子立方体所分配到的单位元元素数量不为零且跟父立方体是一样的，则该子立方体停止细分，因为跟据空间分割理论，细分的空间所得到的分配必定较少，若是一样数目，则再怎么切数目还是一样，会造成无穷切割的情形。
+ * (6). 重复3，直到达到最大递归深度。
+ * 
+ * ##关键函数
+ * 
+ * 1. 具体的构建以及增删改查过程都可以通过函数名直观看出
+ * 2. 为了加快处理流程还添加了OcTreeKey类和KeyRay类，里面涉及具体处理细节
+ */
+
 #ifndef OCTOMAP_OCTREE_BASE_IMPL_H
 #define OCTOMAP_OCTREE_BASE_IMPL_H
 
@@ -50,16 +81,21 @@ namespace octomap {
 class AbstractOcTreeNode;
 
 /**
-   * OcTree的基类，可用于任意种类的OcTreeDataNode。
+   * OcTree base class, to be used with with any kind of OcTreeDataNode.
    *
-   * 这个树的实现当前能允许的最大深度是16. 由此，在最大分辨率为0.01米的情况下，坐标值
-   * 必须在-327.68米到+327.68米之间。
+   * This tree implementation currently has a maximum depth of 16
+   * nodes. For this reason, coordinates values have to be, e.g.,
+   * below +/- 327.68 meters (2^15) at a maximum resolution of 0.01m.
    *
-   * 这个限制让我们可以使用一个用用二进制来表示数据坐标点的高效的key生成方法
+   * This limitation enables the use of an efficient key generation
+   * method which uses the binary representation of the data point
+   * coordinates.
    *
-   * \note 你不应该直接使用这个类，而应该使用OcTreeBase或OccupancyOcTreeBase
+   * \note You should probably not use this class directly, but
+   * OcTreeBase or OccupancyOcTreeBase instead
    *
-   * \tparam NODE 在树中使用的Node类(通常派生自OcTreeDataNode)
+   * \tparam NODE Node class to be used in tree (usually derived from
+   *    OcTreeDataNode)
    * \tparam INTERFACE Interface to be derived from, should be either
    *    AbstractOcTree or AbstractOccupancyOcTree
    */
@@ -77,52 +113,41 @@ public:
     OcTreeBaseImpl(double resolution);
     virtual ~OcTreeBaseImpl();
 
-    // Deep copy constructor
-    /// 深拷贝构造函数
+    /**
+     * @brief 深拷贝构造函数
+     * @param rhs 传入的OcTreeBaseImpl对象，深拷贝会对对象所有内容进行复制，包括容器(比如vector)类型的变量
+     * @return 无
+    */
     OcTreeBaseImpl(const OcTreeBaseImpl<NODE, INTERFACE>& rhs);
 
-    /**
-     * Swap contents of two octrees, i.e., only the underlying
-     * pointer / tree structure. You have to ensure yourself that the
-     * metadata (resolution etc) matches. No memory is cleared
-     * in this function
-     */
-    /// 交换两棵八叉树的内容
+    /// @brief 交换两棵八叉树的内容
     /// @note 需要保证元数据相同（比如解析度），内存没有清除
     void swapContent(OcTreeBaseImpl<NODE, INTERFACE>& rhs);
 
-    // Comparison between two octrees, all meta data, all
-    // nodes, and the structure must be identical
-    /// 重载==，比较两棵八叉树是否相同
+    /// @brief 重载==，比较两棵八叉树是否相同
     /// @note 相同需要元数据、结构都完全相同
     bool operator==(const OcTreeBaseImpl<NODE, INTERFACE>& rhs) const;
 
-    /// 返回当前类型
+    /// @brief 返回当前类型
     std::string getTreeType() const { return "OcTreeBaseImpl"; }
 
-    // Change the resolution of the octree, scaling all voxels.
-    // This will not preserve the (metric) scale!
-    /// 设置解析度（以米作为单位）
+    /// @brief 设置解析度（以米作为单位）
     void setResolution(double r);
-    /// 获取解析度（以米作为单位）
+    /// @brief 获取解析度（以米作为单位）
     inline double getResolution() const { return resolution; }
 
-    /// 获取树深度
+    /// @brief 获取树深度
     inline unsigned int getTreeDepth() const { return tree_depth; }
 
-    /// 获取节点大小
+    /// @brief 获取对应深度节点大小
+    /// @note 会断言depth是否小于等于tree_depth
     inline double getNodeSize(unsigned depth) const
     {
         assert(depth <= tree_depth);
         return sizeLookupTable[depth];
     }
 
-    /**
-     * Clear KeyRay vector to minimize unneeded memory. This is only
-     * useful for the StaticMemberInitializer classes, don't call it for
-     * an octree that is actually used.
-     */
-    /// 清除KeyRay节约内存
+    /// @brief 清除KeyRay节约内存
     /// @note 使用中的八叉树不要调用
     void clearKeyRays()
     {
@@ -131,197 +156,127 @@ public:
 
     // -- Tree structure operations formerly contained in the nodes ---
 
-    // Creates (allocates) the i-th child of the node. @return ptr to newly create NODE
-    /// 创建对应节点的第childIdx个子节点
+    /// @brief 创建对应节点的第childIdx个子节点
     /// @note 必须保证childIdx小于8
     /// @return 新创建的节点
     NODE* createNodeChild(NODE* node, unsigned int childIdx);
 
-    // Deletes the i-th child of the node
-    /// 删除对应节点的第childIdx个子节点
+    /// @brief 创建对应节点的第childIdx个子节点
+    /// @note 必须保证childIdx小于8
+    /// @return 无
     void deleteNodeChild(NODE* node, unsigned int childIdx);
 
-    // @return ptr to child number childIdx of node
-    /// 获取对应节点的第childIdx个子节点
+    /// @brief 获取对应节点的第childIdx个子节点
     /// @return 对应的子节点
     NODE* getNodeChild(NODE* node, unsigned int childIdx) const;
 
-    // @return const ptr to child number childIdx of node
-    /// 以常量形式获取对应节点的第childIdx个子节点
+    /// @brief 以常量形式获取对应节点的第childIdx个子节点
+    /// @return 对应的子节点，const形式
+    /// @note 常函数实现
     const NODE* getNodeChild(const NODE* node, unsigned int childIdx) const;
 
-    // A node is collapsible if all children exist, don't have children of their own
-    // and have the same occupancy value
-    /// 是否可折叠
-    /// @note 折叠的条件是所有的子节点全部存在
+    /// @brief 节点是否可以折叠
+    /// @note 折叠的条件是所有的子节点全部存在，子节点不存在子子节点并且每一个子节点的概率相同
     virtual bool isNodeCollapsible(const NODE* node) const;
 
-    /** 
-     * Safe test if node has a child at index childIdx.
-     * First tests if there are any children. Replaces node->childExists(...)
-     * \return true if the child at childIdx exists
-     */
-    /// 判断对应节点是否有对应childIdx的子节点
+    /// @brief 判断对应节点是否有对应childIdx的子节点
     bool nodeChildExists(const NODE* node, unsigned int childIdx) const;
 
-    /** 
-     * Safe test if node has any children. Replaces node->hasChildren(...)
-     * \return true if node has at least one child
-     */
-    /// 判断对应节点是否有子节点
+    /// @brief 判断对应节点是否有子节点
     bool nodeHasChildren(const NODE* node) const;
 
-    /**
-     * Expands a node (reverse of pruning): All children are created and
-     * their occupancy probability is set to the node's value.
-     *
-     * You need to verify that this is indeed a pruned node (i.e. not a
-     * leaf at the lowest level)
-     *
-     */
-    /// 以父节点的值扩展所有子节点
+    /// @brief 以父节点的概率值扩展所有子节点
     virtual void expandNode(NODE* node);
 
-    /**
-     * Prunes a node when it is collapsible
-     * @return true if pruning was successful
-     */
-    /// 修建（删除）对应的节点
-    /// @note 包括所有的子节点
+    /// @brief 裁剪（删除）对应的节点
+    /// @note 如何可以折叠的话，那就只保留一个节点，其他节点删除
     virtual bool pruneNode(NODE* node);
 
     // --------
 
-    /**
-     * \return Pointer to the root node of the tree. This pointer
-     * should not be modified or deleted externally, the OcTree
-     * manages its memory itself. In an empty tree, root is NULL.
-     */
-    /// 返回root节点
+    /// @brief 返回root节点
+    /// @note 如果root为空，返回null
     inline NODE* getRoot() const { return root; }
 
-    /** 
-     *  Search node at specified depth given a 3d point (depth=0: search full tree depth).
-     *  You need to check if the returned node is NULL, since it can be in unknown space.
-     *  @return pointer to node if found, NULL otherwise
-     */
-    /// 查找对应值的节点(x,y,z)三个坐标必须完全相同
+    /// @brief 查找对应深度对应值的节点，(x,y,z)三个坐标必须完全相同
     /// @note depth=0: 意味着全部，这是默认值，可以指定深度
     NODE* search(double x, double y, double z, unsigned int depth = 0) const;
 
-    /**
-     *  Search node at specified depth given a 3d point (depth=0: search full tree depth)
-     *  You need to check if the returned node is NULL, since it can be in unknown space.
-     *  @return pointer to node if found, NULL otherwise
-     */
-    /// 查找对应值的节点以point3d的格式，可以指定深度
+    /// @brief 查找对应值的节点以point3d的格式，可以指定深度
+    /// @note depth=0: 意味着全部，这是默认值，可以指定深度
     NODE* search(const point3d& value, unsigned int depth = 0) const;
 
-    /**
-     *  Search a node at specified depth given an addressing key (depth=0: search full tree depth)
-     *  You need to check if the returned node is NULL, since it can be in unknown space.
-     *  @return pointer to node if found, NULL otherwise
-     */
-    /// 查找对应值的节点以OcTreeKey的格式，可以指定深度
+    /// @brief 查找对应值的节点以OcTreeKey的格式，可以指定深度
+    /// @note depth=0: 意味着全部，这是默认值，可以指定深度
     NODE* search(const OcTreeKey& key, unsigned int depth = 0) const;
 
-    /**
-     *  Delete a node (if exists) given a 3d point. Will always
-     *  delete at the lowest level unless depth !=0, and expand pruned inner nodes as needed.
-     *  Pruned nodes at level "depth" will directly be deleted as a whole.
-     */
-    /// 删除对应值的节点(x,y,z)三个坐标必须完全相同
+    /// @brief 删除对应值的节点(x,y,z)三个坐标必须完全相同
+    /// @note depth=0: 意味着全部，这是默认值，可以指定深度
+    /// @note 可以裁剪的节点会直接全部删除
     bool deleteNode(double x, double y, double z, unsigned int depth = 0);
 
-    /** 
-     *  Delete a node (if exists) given a 3d point. Will always
-     *  delete at the lowest level unless depth !=0, and expand pruned inner nodes as needed.
-     *  Pruned nodes at level "depth" will directly be deleted as a whole.
-     */
-    /// 删除对应值的节点以point3d的格式，可以指定深度
+    /// @brief 删除对应值的节点以point3d的格式，可以指定深度
+    /// @note depth=0: 意味着全部，这是默认值，可以指定深度
+    /// @note 可以裁剪的节点会直接全部删除
     bool deleteNode(const point3d& value, unsigned int depth = 0);
 
-    /** 
-     *  Delete a node (if exists) given an addressing key. Will always
-     *  delete at the lowest level unless depth !=0, and expand pruned inner nodes as needed.
-     *  Pruned nodes at level "depth" will directly be deleted as a whole.
-     */
-    /// 删除对应值的节点以OcTreeKey的格式，可以指定深度
+    /// @brief 删除对应值的节点以OcTreeKey的格式，可以指定深度
+    /// @note depth=0: 意味着全部，这是默认值，可以指定深度
+    /// @note 可以裁剪的节点会直接全部删除
     bool deleteNode(const OcTreeKey& key, unsigned int depth = 0);
 
-    // Deletes the complete tree structure
-    /// 删除全部
+    /// @brief 删除树的全部结构
     void clear();
 
-    /**
-     * Lossless compression of the octree: A node will replace all of its eight
-     * children if they have identical values. You usually don't have to call
-     * prune() after a regular occupancy update, updateNode() incrementally
-     * prunes all affected nodes.
-     */
-    /// 剪枝（如果所有子节点的值相同，可以剪枝为一个）
+    /// @brief 剪枝（如果所有子节点的值相同，可以剪枝为一个）
+    /// @note 通常不需要自己去调用，updateNode()会自动调用
     virtual void prune();
 
-    /// Expands all pruned nodes (reverse of prune())
-    /// \note This is an expensive operation, especially when the tree is nearly empty!
-    /// 扩展所有剪枝的节点
+    /// @brief 扩展所有剪枝的节点
+    /// @note 这步操作花费（费时、费空间）很大，尤其当树接近空的时候
     virtual void expand();
 
     // -- statistics  ----------------------
 
-    // \return The number of nodes in the tree
-    /// 返回树的大小
+    /// @brief 返回树的大小
     virtual inline size_t size() const { return tree_size; }
 
-    // \return Memory usage of the complete octree in bytes (may vary between architectures)
-    /// 返回树占用的空间（字节）
-    /// @note 会计算全部占用空间
+    /// @brief 返回树占用的空间（字节）
+    /// @note 不同平台的大小计算可能不一样
     virtual size_t memoryUsage() const;
 
-    // \return Memory usage of a single octree node
-    /// 只返回自己占用的空间（自己和只属于自己的子节点）
+    /// @brief 返回单个节点占用空间
     virtual inline size_t memoryUsageNode() const { return sizeof(NODE); };
 
-    // \return Memory usage of a full grid of the same size as the OcTree in bytes (for comparison)
-    // \note this can be larger than the adressable memory - size_t may not be enough to hold it!
-    /// 返回所有grid（地图格子）上全部占用的内存量
-    /// 返回值可能会超过size_t(依据平台,unsigned int)的最大值
+    /// @brief 返回所有以grid地图（地图格子）占用的大小，用于和八叉树进行比较
+    /// @note 返回值可能会非常大，超过size_t(依据平台,unsigned int)的最大值
     unsigned long long memoryFullGrid() const;
 
-    /// 最大最小差值的乘积
+    /// @brief 容量：最大最小差值的乘积
     double volume();
 
-    // Size of OcTree (all known space) in meters for x, y and z dimension
-    /// 已知空间下x, y and z的差值（最大值减去最小值）虚函数
+    /// @brief 已知空间下x, y and z的差值（最大值减去最小值）
     virtual void getMetricSize(double& x, double& y, double& z);
-    // Size of OcTree (all known space) in meters for x, y and z dimension
-    /// 已知空间下x, y and z的差值（最大值减去最小值）常函数
+    /// @brief 已知空间下x, y and z的差值（最大值减去最小值）常函数
     virtual void getMetricSize(double& x, double& y, double& z) const;
-    // minimum value of the bounding box of all known space in x, y, z
-    /// 已知空间下x, y and z的最小值 虚函数
+    /// @brief 已知空间下x, y and z的最小值
     virtual void getMetricMin(double& x, double& y, double& z);
-    // minimum value of the bounding box of all known space in x, y, z
-    /// 已知空间下x, y and z的最小值
+    /// @brief 已知空间下x, y and z的最小值
     void getMetricMin(double& x, double& y, double& z) const;
-    // maximum value of the bounding box of all known space in x, y, z
-    /// 已知空间下x, y and z的最大值 虚函数
+    /// @brief 已知空间下x, y and z的最大值
     virtual void getMetricMax(double& x, double& y, double& z);
-    // maximum value of the bounding box of all known space in x, y, z
-    /// 已知空间下x, y and z的最大值
+    /// @brief 已知空间下x, y and z的最大值
     void getMetricMax(double& x, double& y, double& z) const;
 
-    // Traverses the tree to calculate the total number of nodes
-    /// 递归计算所有节点总数
+    /// @brief 计算所有节点总数
     size_t calcNumNodes() const;
 
-    // Traverses the tree to calculate the total number of leaf nodes
-    /// 计算所有叶子节点总数
+    /// @brief 计算所有叶子节点总数
     size_t getNumLeafNodes() const;
 
     // -- access tree nodes  ------------------
 
-    // return centers of leafs that do NOT exist (but could) in a given bounding box
-    /// 获取不在给定空间下所有的叶子节点
+    /// @brief 获取不在给定空间下所有的叶子节点
     /// @param point3d pmin 给定三维节点的最小值
     /// @param point3d pmax 给定三维节点的最大值
     /// @param point3d_list& node_centers 以list形式返回结果
@@ -329,126 +284,93 @@ public:
 
     // -- raytracing  -----------------------
 
-    /**
-    * Traces a ray from origin to end (excluding), returning an
-    * OcTreeKey of all nodes traversed by the beam. You still need to check
-    * if a node at that coordinate exists (e.g. with search()).
-    *
-    * @param origin start coordinate of ray
-    * @param end end coordinate of ray
-    * @param ray KeyRay structure that holds the keys of all nodes traversed by the ray, excluding "end"
-    * @return Success of operation. Returning false usually means that one of the coordinates is out of the OcTree's range
-    */
-    /// 将给定在坐标起止中的点添加到KeyRay中，便于追踪变化的点
+    /// @brief 将给定在坐标起止中的点添加到KeyRay中，便于追踪变化的点
     /// @param origin 开始坐标
     /// @param end 终止坐标
     /// @param ray 以KeyRay形式保存所有点，不包括终点end
+    /// @return true：成功添加，false：起止坐标有误或超过边界
     bool computeRayKeys(const point3d& origin, const point3d& end, KeyRay& ray) const;
 
-    /**
-    * Traces a ray from origin to end (excluding), returning the
-    * coordinates of all nodes traversed by the beam. You still need to check
-    * if a node at that coordinate exists (e.g. with search()).
-    * @note: use the faster computeRayKeys method if possible.
-    * 
-    * @param origin start coordinate of ray
-    * @param end end coordinate of ray
-    * @param ray KeyRay structure that holds the keys of all nodes traversed by the ray, excluding "end"
-    * @return Success of operation. Returning false usually means that one of the coordinates is out of the OcTree's range
-    */
-    /// 将给定在坐标起止中的点添加到KeyRay中，便于追踪变化的点
+    /// @brief 将给定在坐标起止中的点添加到Ray中，便于追踪变化的点
     /// @param origin 开始坐标
     /// @param end 终止坐标
-    /// @param ray 以KeyRay形式保存所有点，不包括终点end
-    /// @note 这里以std::vector<point3d>形式存储，理论上computeRayKeys要快一些
+    /// @param ray 以std::vector形式保存所有点，不包括终点end
+    /// @return true：成功添加，false：起止坐标有误或超过边界
     bool computeRay(const point3d& origin, const point3d& end, std::vector<point3d>& ray);
 
-    // file IO
-
-    /**
-     * Read all nodes from the input stream (without file header),
-     * for this the tree needs to be already created.
-     * For general file IO, you
-     * should probably use AbstractOcTree::read() instead.
-     */
-    /// 从给定istream中读取所有节点
+    /// @brief 从给定istream中读取所有节点
     std::istream& readData(std::istream& s);
 
-    // Write complete state of tree to stream (without file header) unmodified.
-    // Pruning the tree first produces smaller files (lossless compression)
-    /// 将所有节点信息写入ostream
+    /// @brief 将所有节点信息写入ostream
+    /// @return 对应的ostream
     std::ostream& writeData(std::ostream& s) const;
 
     typedef leaf_iterator iterator;
 
-    // @return beginning of the tree as leaf iterator
-    /// 返回树最开始的iterator
+    /// @brief 返回树最开始的iterator
+    /// @return 对应的iterator
     iterator begin(unsigned char maxDepth = 0) const { return iterator(this, maxDepth); };
-    // @return end of the tree as leaf iterator
-    /// 返回树最终的iterator
+    /// @brief 返回树最终的iterator
+    /// @return 对应的iterator
     const iterator end() const { return leaf_iterator_end; }; // TODO: RVE?
 
-    // @return beginning of the tree as leaf iterator
-    /// 返回树最开始的iterator
+    /// @brief 返回叶子节点最开始的iterator
+    /// @return 对应的leaf_iterator
     leaf_iterator begin_leafs(unsigned char maxDepth = 0) const { return leaf_iterator(this, maxDepth); };
-    // @return end of the tree as leaf iterator
-    /// 返回树最终的iterator
+    /// @brief 返回叶子节点最终的iterator
+    /// @return 对应的leaf_iterator
     const leaf_iterator end_leafs() const { return leaf_iterator_end; }
 
-    // @return beginning of the tree as leaf iterator in a bounding box
-    /// 返回给定空间的起始叶子节点iterator，以OcTreeKey格式
+    /// @brief 返回给定空间的起始叶子节点iterator，以OcTreeKey格式
+    /// @return 对应的leaf_bbx_iterator
     leaf_bbx_iterator begin_leafs_bbx(const OcTreeKey& min, const OcTreeKey& max, unsigned char maxDepth = 0) const
     {
         return leaf_bbx_iterator(this, min, max, maxDepth);
     }
-    // @return beginning of the tree as leaf iterator in a bounding box
-    /// 返回给定空间的起始叶子节点iterator，以point3d格式
+    /// @brief 返回给定空间的起始叶子节点iterator，以point3d格式
+    /// @return 对应的leaf_bbx_iterator
     leaf_bbx_iterator begin_leafs_bbx(const point3d& min, const point3d& max, unsigned char maxDepth = 0) const
     {
         return leaf_bbx_iterator(this, min, max, maxDepth);
     }
-    // @return end of the tree as leaf iterator in a bounding box
-    /// 返回给定空间的终止叶子节点iterator
+    /// @brief 返回给定空间的终止叶子节点iterator
+    /// @return 对应的leaf_bbx_iterator
     const leaf_bbx_iterator end_leafs_bbx() const { return leaf_iterator_bbx_end; }
 
-    // @return beginning of the tree as iterator to all nodes (incl. inner)
-    /// 返回所有节点中的起始iterator
+    /// @brief 返回所有节点中的起始iterator
+    /// @note 可以遍历所有节点
+    /// @note 这几种iterator的++运算符重载内容不一样
     tree_iterator begin_tree(unsigned char maxDepth = 0) const { return tree_iterator(this, maxDepth); }
-    // @return end of the tree as iterator to all nodes (incl. inner)
-    /// 返回所有节点中的终止iterator
+    /// @brief 返回所有节点中的终止iterator
+    /// @note 这几种iterator的++运算符重载内容不一样
     const tree_iterator end_tree() const { return tree_iterator_end; }
 
     //
     // Key / coordinate conversion functions
     //
 
-    /// Converts from a single coordinate into a discrete key
-    /// 将坐标转换为离散的key
+    /// @brief 将坐标转换为离散的key
     inline key_type coordToKey(double coordinate) const
     {
         return ((int)floor(resolution_factor * coordinate)) + tree_max_val;
     }
 
-    // Converts from a single coordinate into a discrete key at a given depth
-    /// 将坐标转换为离散的key，给定层数
+    /// @brief 将坐标转换为离散的key，给定层数
     key_type coordToKey(double coordinate, unsigned depth) const;
 
-    // Converts from a 3D coordinate into a 3D addressing key
-    /// 将3D坐标转换为离散的key，point3d格式
+    /// @brief 将3D坐标转换为离散的key，point3d格式
     inline OcTreeKey coordToKey(const point3d& coord) const
     {
         return OcTreeKey(coordToKey(coord(0)), coordToKey(coord(1)), coordToKey(coord(2)));
     }
 
-    // Converts from a 3D coordinate into a 3D addressing key
-    /// 将3D坐标转换为离散的key，x,y和z格式
+    /// @brief 将3D坐标转换为离散的key，x,y和z格式
     inline OcTreeKey coordToKey(double x, double y, double z) const
     {
         return OcTreeKey(coordToKey(x), coordToKey(y), coordToKey(z));
     }
 
-    // Converts from a 3D coordinate into a 3D addressing key at a given depth
-    /// 将3D坐标转换为离散的key，point3d格式，给定层数
+    /// @brief 将3D坐标转换为离散的key，point3d格式，给定层数
     inline OcTreeKey coordToKey(const point3d& coord, unsigned depth) const
     {
         if (depth == tree_depth)
@@ -457,8 +379,7 @@ public:
             return OcTreeKey(coordToKey(coord(0), depth), coordToKey(coord(1), depth), coordToKey(coord(2), depth));
     }
 
-    // Converts from a 3D coordinate into a 3D addressing key at a given depth
-    /// 将3D坐标转换为离散的key，x,y和z格式，给定层数
+    /// @brief 将3D坐标转换为离散的key，x,y和z格式，给定层数
     inline OcTreeKey coordToKey(double x, double y, double z, unsigned depth) const
     {
         if (depth == tree_depth)
@@ -467,17 +388,10 @@ public:
             return OcTreeKey(coordToKey(x, depth), coordToKey(y, depth), coordToKey(z, depth));
     }
 
-    /**
-     * Adjusts a 3D key from the lowest level to correspond to a higher depth (by
-     * shifting the key values)
-     *
-     * @param key Input key, at the lowest tree level
-     * @param depth Target depth level for the new key
-     * @return Key for the new depth level
-     */
-    /// 将低层的key调整为给定层数的key
+    /// @brief 将低层的key调整为给定层数的key
     /// @param key 输入key, 在树最底层
     /// @param depth 目标层数
+    /// @return 调整后的OcTreeKey
     inline OcTreeKey adjustKeyAtDepth(const OcTreeKey& key, unsigned int depth) const
     {
         if (depth == tree_depth)
@@ -487,175 +401,101 @@ public:
         return OcTreeKey(adjustKeyAtDepth(key[0], depth), adjustKeyAtDepth(key[1], depth), adjustKeyAtDepth(key[2], depth));
     }
 
-    /**
-     * Adjusts a single key value from the lowest level to correspond to a higher depth (by
-     * shifting the key value)
-     *
-     * @param key Input key, at the lowest tree level
-     * @param depth Target depth level for the new key
-     * @return Key for the new depth level
-     */
-    /// 将低层的key调整为给定层数的key
+    /// @brief 将低层的key调整为给定层数的key
     /// @param key 输入key, 在树最底层
     /// @param depth 目标层数
+    /// @return 调整后的key_type
     key_type adjustKeyAtDepth(key_type key, unsigned int depth) const;
 
-    /**
-     * Converts a 3D coordinate into a 3D OcTreeKey, with boundary checking.
-     *
-     * @param coord 3d coordinate of a point
-     * @param key values that will be computed, an array of fixed size 3.
-     * @return true if point is within the octree (valid), false otherwise
-     */
-    /// 将3D坐标转换为3D key，并且有边界检查
+    /// @brief 将3D坐标转换为3D key，并且有边界检查
     /// @param coord 3d坐标
     /// @param key 对应的key
-    /// @return true 转换有效
+    /// @return true 转换有效，false无效
     bool coordToKeyChecked(const point3d& coord, OcTreeKey& key) const;
 
-    /**
-     * Converts a 3D coordinate into a 3D OcTreeKey at a certain depth, with boundary checking.
-     *
-     * @param coord 3d coordinate of a point
-     * @param depth level of the key from the top
-     * @param key values that will be computed, an array of fixed size 3.
-     * @return true if point is within the octree (valid), false otherwise
-     */
-    /// 将3D坐标转换为3D key，并且有边界检查
+    /// @brief 将3D坐标转换为3D key，并且有边界检查
     /// @param coord 3d坐标
     /// @param key 对应的key
-    /// @return true 转换有效
+    /// @return true 转换有效，false无效
     bool coordToKeyChecked(const point3d& coord, unsigned depth, OcTreeKey& key) const;
 
-    /**
-     * Converts a 3D coordinate into a 3D OcTreeKey, with boundary checking.
-     *
-     * @param x
-     * @param y
-     * @param z
-     * @param key values that will be computed, an array of fixed size 3.
-     * @return true if point is within the octree (valid), false otherwise
-     */
-    /// 将3D坐标转换为3D key，并且有边界检查
+    /// @brief 将3D坐标转换为3D key，并且有边界检查
     /// @param x,y,z 3d坐标
     /// @param key 对应的key
     /// @return true 转换有效
     bool coordToKeyChecked(double x, double y, double z, OcTreeKey& key) const;
 
-    /**
-     * Converts a 3D coordinate into a 3D OcTreeKey at a certain depth, with boundary checking.
-     *
-     * @param x
-     * @param y
-     * @param z
-     * @param depth level of the key from the top
-     * @param key values that will be computed, an array of fixed size 3.
-     * @return true if point is within the octree (valid), false otherwise
-     */
-    /// 将3D坐标转换为3D key，并且有边界检查
+    /// @brief 将3D坐标转换为3D key，并且有边界检查
     /// @param x,y,z 3d坐标
     /// @param key 对应的key
     /// @return true 转换有效
     bool coordToKeyChecked(double x, double y, double z, unsigned depth, OcTreeKey& key) const;
 
-    /**
-     * Converts a single coordinate into a discrete addressing key, with boundary checking.
-     *
-     * @param coordinate 3d coordinate of a point
-     * @param key discrete 16 bit adressing key, result
-     * @return true if coordinate is within the octree bounds (valid), false otherwise
-     */
-    /// 将坐标转换为地址，并且有边界检查
+    /// @brief 将坐标转换为地址，并且有边界检查
     /// @param coordinate 坐标
     /// @param key 对应的地址
     /// @return true 转换有效
     bool coordToKeyChecked(double coordinate, key_type& key) const;
 
-    /**
-     * Converts a single coordinate into a discrete addressing key, with boundary checking.
-     *
-     * @param coordinate 3d coordinate of a point
-     * @param depth level of the key from the top
-     * @param key discrete 16 bit adressing key, result
-     * @return true if coordinate is within the octree bounds (valid), false otherwise
-     */
-    /// 将坐标转换为地址，并且有边界检查
+    /// @brief 将坐标转换为地址，并且有边界检查
     /// @param coordinate 坐标
     /// @param depth 层数
     /// @param key 对应的地址
     /// @return true 转换有效
     bool coordToKeyChecked(double coordinate, unsigned depth, key_type& key) const;
 
-    // converts from a discrete key at a given depth into a coordinate
-    // corresponding to the key's center
-    /// 将离散的key转换为对应层数的坐标
+    /// @brief 将离散的key转换为对应层数的坐标
     double keyToCoord(key_type key, unsigned depth) const;
 
-    // converts from a discrete key at the lowest tree level into a coordinate
-    // corresponding to the key's center
-    /// 将离散key转换为底层树的坐标
+    /// @brief 将离散key转换为底层树的坐标
     inline double keyToCoord(key_type key) const
     {
         return (double((int)key - (int)this->tree_max_val) + 0.5) * this->resolution;
     }
 
-    // converts from an addressing key at the lowest tree level into a coordinate
-    // corresponding to the key's center
-    /// 将地址转为对应最底层树的坐标
+    /// @brief 将地址转为对应最底层树的坐标
     inline point3d keyToCoord(const OcTreeKey& key) const
     {
         return point3d(float(keyToCoord(key[0])), float(keyToCoord(key[1])), float(keyToCoord(key[2])));
     }
 
-    // converts from an addressing key at a given depth into a coordinate
-    // corresponding to the key's center
-    /// 将地址转为对应最底层树的坐标，给定层数
+    /// @brief 将地址转为对应最底层树的坐标，给定层数
     inline point3d keyToCoord(const OcTreeKey& key, unsigned depth) const
     {
         return point3d(float(keyToCoord(key[0], depth)), float(keyToCoord(key[1], depth)), float(keyToCoord(key[2], depth)));
     }
 
 protected:
-    // Constructor to enable derived classes to change tree constants.
-    // This usually requires a re-implementation of some core tree-traversal functions as well!
-    /// 继承的构造函数
+    /// @brief 继承的构造函数
     OcTreeBaseImpl(double resolution, unsigned int tree_depth, unsigned int tree_max_val);
 
-    // initialize non-trivial members, helper for constructors
-    /// 初始化
+    /// @brief 初始化
     void init();
 
-    // recalculates min and max in x, y, z. Does nothing when tree size didn't change.
-    /// 计算最大最小的坐标值
+    /// @brief 计算最大最小的坐标值
     void calcMinMax();
 
     void calcNumNodesRecurs(NODE* node, size_t& num_nodes) const;
 
-    // recursive call of readData()
-    /// 递归调用readData()
+    /// @brief 递归调用readData()
     std::istream& readNodesRecurs(NODE*, std::istream& s);
 
-    // recursive call of writeData()
-    /// 递归调用writeData()
+    /// @brief 递归调用writeData()
     std::ostream& writeNodesRecurs(const NODE*, std::ostream& s) const;
 
-    // Recursively delete a node and all children. Deallocates memory
-    // but does NOT set the node ptr to NULL nor updates tree size.
-    /// 递归删除所有节点和子节点
+    /// @brief 递归删除所有节点和子节点
     void deleteNodeRecurs(NODE* node);
 
-    // recursive call of deleteNode()
-    /// 递归调用deleteNode()
+    /// @brief 递归调用deleteNode()
     bool deleteNodeRecurs(NODE* node, unsigned int depth, unsigned int max_depth, const OcTreeKey& key);
 
-    // recursive call of prune()
-    /// 递归调用prune()
+    /// @brief 递归调用prune()
     void pruneRecurs(NODE* node, unsigned int depth, unsigned int max_depth, unsigned int& num_pruned);
 
-    // recursive call of expand()
-    /// 递归调用expand()
+    /// @brief 递归调用expand()
     void expandRecurs(NODE* node, unsigned int depth, unsigned int max_depth);
 
+    /// @brief 递归获取叶子节点数
     size_t getNumLeafNodesRecurs(const NODE* parent) const;
 
 private:
