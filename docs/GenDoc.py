@@ -30,7 +30,7 @@ for k, v in file_dict.items():
 # Modify doxygen config
 print("Phase 1: " + "Modify configuration")
 prefix = "INPUT   = "
-cmd = "sed -i \'774c " + prefix + file_list + "\' " + current_dir + "Doxyfile"
+cmd = "gsed -i \'774c " + prefix + file_list + "\' " + current_dir + "Doxyfile"
 config_result = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
 while subprocess.Popen.poll(config_result) is None:
     time.sleep(0.1)
@@ -44,14 +44,14 @@ while subprocess.Popen.poll(gen_result) is None:
 
 # Generate PDF in Chinese
 print("Phase 3: " + "Set utf-8 for Chinese pdf")
-replace_cmd = r"sed -i -e 's,begin{document},usepackage{CJKutf8}\n\\begin{document}\n\\begin{CJK}{UTF8}{gbsn},' " + current_dir + r"/latex/refman.tex"
+replace_cmd = r"gsed -i -e 's,begin{document},usepackage{CJKutf8}\n\\begin{document}\n\\begin{CJK}{UTF8}{gbsn},' " + current_dir + r"/latex/refman.tex"
 print(replace_cmd)
 replace_result = subprocess.Popen(replace_cmd, stdout=subprocess.PIPE, shell=True)
 while subprocess.Popen.poll(replace_result) is None:
     time.sleep(0.1)
 
 
-replace_cmd = r"sed -i -e 's,end{document},end{CJK}\n\\end{document},' " + current_dir + r"/latex/refman.tex"
+replace_cmd = r"gsed -i -e 's,end{document},end{CJK}\n\\end{document},' " + current_dir + r"/latex/refman.tex"
 print(replace_cmd)
 replace_result = subprocess.Popen(replace_cmd, stdout=subprocess.PIPE, shell=True)
 while subprocess.Popen.poll(replace_result) is None:
